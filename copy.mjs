@@ -1,6 +1,6 @@
 import { copyFile } from "node:fs/promises";
 
-const filesToCopy = ["main.js", "styles.css", "manifest.json"];
+const filesToCopy = ["main.js", "styles.css", "manifest.json", ".hotreload"];
 const pluginPath = process.env.PLUGIN_PATH;
 
 async function copyFiles() {
