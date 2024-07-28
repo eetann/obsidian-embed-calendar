@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "obsidian-embed-calendar",
+	"name": "Obsidian Embed Calendar",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "Displays a calendar that can be embedded using dataview.",
+	"author": "eetann",
+	"authorUrl": "https://eiji.page",
+	"fundingUrl": "https://github.com/eetann",
 	"isDesktopOnly": false
 }
