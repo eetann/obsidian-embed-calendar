@@ -1,14 +1,8 @@
-import {
-	type App,
-	Modal,
-	Notice,
-	Plugin,
-	PluginSettingTab,
-	Setting,
-} from "obsidian";
-import { ReactRenderer } from "./render";
-
-// Remember to rename these classes and interfaces!
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import { type App, Plugin, PluginSettingTab, Setting } from "obsidian";
+import React, { StrictMode } from "react";
+import { createRoot, type Root } from "react-dom/client";
+import Calendar from "./calendar/Calendar";
 
 interface EmbedCalendarSettings {
 	mySetting: string;
@@ -20,44 +14,27 @@ const DEFAULT_SETTINGS: EmbedCalendarSettings = {
 
 export default class EmbedCalendar extends Plugin {
 	settings: EmbedCalendarSettings;
+	root: Root;
 
 	async onload() {
 		await this.loadSettings();
 
-		// This creates an icon in the left ribbon.
-		const ribbonIconEl = this.addRibbonIcon(
-			"dice",
-			"Calendar Plugin",
-			(evt: MouseEvent) => {
-				// Called when the user clicks the icon.
-				new Notice("THIS is a notice!");
-			},
-		);
-		// Perform additional things with the ribbon
-		ribbonIconEl.addClass("my-plugin-ribbon-class");
-
-		// This adds a status bar item to the bottom of the app. Does not work on mobile apps.
-		const statusBarItemEl = this.addStatusBarItem();
-		statusBarItemEl.setText("Status Bar Text");
-
-		// This adds a simple command that can be triggered anywhere
-		this.addCommand({
-			id: "open-sample-modal-simple",
-			name: "Open sample modal (simple)",
-			callback: () => {
-				new EmbedCalendarModal(this.app).open();
-			},
-		});
-
 		this.registerMarkdownCodeBlockProcessor("aaa", (code, el, ctx) => {
-			ctx.addChild(new ReactRenderer(el));
+			this.root = createRoot(el);
+			this.root.render(
+				<StrictMode>
+					<Calendar />
+				</StrictMode>,
+			);
 		});
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new EmbedCalendarSettingTab(this.app, this));
 	}
 
-	onunload() {}
+	onunload() {
+		this.root?.unmount();
+	}
 
 	async loadSettings() {
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
@@ -65,18 +42,6 @@ export default class EmbedCalendar extends Plugin {
 
 	async saveSettings() {
 		await this.saveData(this.settings);
-	}
-}
-
-class EmbedCalendarModal extends Modal {
-	onOpen() {
-		const { contentEl } = this;
-		contentEl.setText("Woah!");
-	}
-
-	onClose() {
-		const { contentEl } = this;
-		contentEl.empty();
 	}
 }
 
