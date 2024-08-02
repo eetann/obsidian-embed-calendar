@@ -1,4 +1,5 @@
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import "./main.css";
 import { type App, Plugin, PluginSettingTab, Setting } from "obsidian";
 import React, { StrictMode } from "react";
 import { createRoot, type Root } from "react-dom/client";
@@ -23,7 +24,9 @@ export default class EmbedCalendar extends Plugin {
 			this.root = createRoot(el);
 			this.root.render(
 				<StrictMode>
-					<Calendar />
+					<div className="ob-embed-calendar">
+						<Calendar />
+					</div>
 				</StrictMode>,
 			);
 		});

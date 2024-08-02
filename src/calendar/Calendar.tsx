@@ -15,7 +15,7 @@ export default function Calendar() {
 		[],
 	);
 	return (
-		<div>
+		<div className="bg-red-500 h-[500px]">
 			<BigCalendar defaultDate={defaultDate} localizer={localizer} />
 		</div>
 	);
