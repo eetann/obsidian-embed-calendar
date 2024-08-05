@@ -1,9 +1,5 @@
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import "./main.css";
 import { type App, Plugin, PluginSettingTab, Setting } from "obsidian";
-import React, { StrictMode } from "react";
-import { createRoot, type Root } from "react-dom/client";
-import Calendar from "./calendar/Calendar";
+import { ReactMarkdownRenderChild } from "./App";
 
 interface EmbedCalendarSettings {
 	mySetting: string;
@@ -15,28 +11,21 @@ const DEFAULT_SETTINGS: EmbedCalendarSettings = {
 
 export default class EmbedCalendar extends Plugin {
 	settings: EmbedCalendarSettings;
-	root: Root;
 
 	async onload() {
 		await this.loadSettings();
 
-		this.registerMarkdownCodeBlockProcessor("aaa", (code, el, ctx) => {
-			this.root = createRoot(el);
-			this.root.render(
-				<StrictMode>
-					<div className="ob-embed-calendar">
-						<Calendar />
-					</div>
-				</StrictMode>,
-			);
-		});
+		this.registerMarkdownCodeBlockProcessor(
+			"aaa",
+			(_source, element, context) => {
+				const container = element.createEl("div");
+				const renderer = new ReactMarkdownRenderChild(container);
+				context.addChild(renderer);
+			},
+		);
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new EmbedCalendarSettingTab(this.app, this));
-	}
-
-	onunload() {
-		this.root?.unmount();
 	}
 
 	async loadSettings() {
