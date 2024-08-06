@@ -19,17 +19,9 @@ export default class EmbedCalendar extends Plugin {
 		this.registerMarkdownCodeBlockProcessor(
 			"embed-calendar",
 			async (source, element, context) => {
-				try {
-					const expression = await getValuesFromSource(source);
-					console.log(expression.pages);
-					console.log(expression.options);
-					const container = element.createEl("div");
-					const renderer = new ReactMarkdownRenderChild(container);
-					context.addChild(renderer);
-				} catch (e) {
-					console.log(e);
-					// TODO: エラー用の表示を追加する
-				}
+				const container = element.createEl("div");
+				const renderer = new ReactMarkdownRenderChild(container, source);
+				context.addChild(renderer);
 			},
 		);
 

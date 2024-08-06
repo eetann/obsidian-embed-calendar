@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 import "dayjs/locale/ja";
 // Cannot get type if called directly `from "obsidian-dataview"`
 import type { DataviewApi } from "obsidian-dataview/lib/api/plugin-api";
-import { getAPI } from "obsidian-dataview";
 import { useEffect, useMemo, useState } from "react";
 import {
 	Calendar as BigCalendar,
@@ -27,29 +26,31 @@ const messages = {
 	// 他のメッセージもカスタマイズできます
 };
 
-const events: Event[] = [
-	{
-		title: "test",
-		start: dayjs("2024-08-12").toDate(),
-		end: dayjs("2024-08-13").toDate(),
-		allDay: true,
-	},
-];
+type Props = {
+	pages: ReturnType<DataviewApi["pages"]>;
+};
 
-const api: DataviewApi = getAPI();
-
-export default function Calendar() {
+export default function Calendar({ pages }: Props) {
 	const { defaultDate } = useMemo(
 		() => ({
 			defaultDate: dayjs("2024-08-05").toDate(),
 		}),
 		[],
 	);
-	const [myEvents, setMyEvents] = useState<Event[]>([]);
+	const [events, setEvents] = useState<Event[]>([]);
 
 	useEffect(() => {
-		console.log(api.pages('"inbox"'));
-	}, []);
+		const _events = pages
+			.map((p) => ({
+				// TODO: タイトルかパスか選択
+				title: p.file.path,
+				start: dayjs("2024-08-12").toDate(),
+				end: dayjs("2024-08-13").toDate(),
+				allDay: true,
+			}))
+			.array();
+		setEvents(_events);
+	}, [pages]);
 
 	return (
 		<div className="h-[500px]">
