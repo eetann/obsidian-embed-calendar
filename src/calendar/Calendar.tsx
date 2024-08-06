@@ -1,7 +1,14 @@
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
-import { useMemo } from "react";
-import { Calendar as BigCalendar, dayjsLocalizer } from "react-big-calendar";
+// Cannot get type if called directly `from "obsidian-dataview"`
+import type { DataviewApi } from "obsidian-dataview/lib/api/plugin-api";
+import { getAPI } from "obsidian-dataview";
+import { useEffect, useMemo, useState } from "react";
+import {
+	Calendar as BigCalendar,
+	type Event,
+	dayjsLocalizer,
+} from "react-big-calendar";
 
 const localizer = dayjsLocalizer(dayjs);
 
@@ -20,17 +27,35 @@ const messages = {
 	// 他のメッセージもカスタマイズできます
 };
 
+const events: Event[] = [
+	{
+		title: "test",
+		start: dayjs("2024-08-12").toDate(),
+		end: dayjs("2024-08-13").toDate(),
+		allDay: true,
+	},
+];
+
+const api: DataviewApi = getAPI();
+
 export default function Calendar() {
 	const { defaultDate } = useMemo(
 		() => ({
-			defaultDate: new Date(2015, 3, 13),
+			defaultDate: dayjs("2024-08-05").toDate(),
 		}),
 		[],
 	);
+	const [myEvents, setMyEvents] = useState<Event[]>([]);
+
+	useEffect(() => {
+		console.log(api.pages('"inbox"'));
+	}, []);
+
 	return (
 		<div className="h-[500px]">
 			<BigCalendar
 				defaultDate={defaultDate}
+				events={events}
 				localizer={localizer}
 				formats={formats}
 				messages={messages}

@@ -1,5 +1,6 @@
 import { type App, Plugin, PluginSettingTab, Setting } from "obsidian";
 import { ReactMarkdownRenderChild } from "./App";
+import { getValuesFromSource } from "./expression";
 
 interface EmbedCalendarSettings {
 	mySetting: string;
@@ -16,11 +17,19 @@ export default class EmbedCalendar extends Plugin {
 		await this.loadSettings();
 
 		this.registerMarkdownCodeBlockProcessor(
-			"aaa",
-			(_source, element, context) => {
-				const container = element.createEl("div");
-				const renderer = new ReactMarkdownRenderChild(container);
-				context.addChild(renderer);
+			"embed-calendar",
+			async (source, element, context) => {
+				try {
+					const expression = await getValuesFromSource(source);
+					console.log(expression.pages);
+					console.log(expression.options);
+					const container = element.createEl("div");
+					const renderer = new ReactMarkdownRenderChild(container);
+					context.addChild(renderer);
+				} catch (e) {
+					console.log(e);
+					// TODO: エラー用の表示を追加する
+				}
 			},
 		);
 
