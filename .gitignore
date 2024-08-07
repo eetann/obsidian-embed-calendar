@@ -23,3 +23,10 @@ data.json
 
 dist
 .env
+
+
+test-vault/.obsidian/workspace.json
+test-vault/.obsidian/workspace-mobile.json
+test-vault/.obsidian/plugins/
+test-vault/.trash/
+test-vault/.DS_Store

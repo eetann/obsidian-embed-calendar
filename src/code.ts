@@ -76,6 +76,7 @@ export async function parseCalendarData(source: string): Promise<CalendarData> {
 		events.push({
 			...event,
 			start: dayjs(event.start).toDate(),
+			// TODO: endが無ければstartと同じにする
 			end: dayjs(event.end).toDate(),
 		});
 	}
