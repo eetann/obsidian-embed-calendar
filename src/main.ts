@@ -1,6 +1,5 @@
 import { type App, Plugin, PluginSettingTab, Setting } from "obsidian";
 import { ReactMarkdownRenderChild } from "./App";
-import { getValuesFromSource } from "./expression";
 
 interface EmbedCalendarSettings {
 	mySetting: string;

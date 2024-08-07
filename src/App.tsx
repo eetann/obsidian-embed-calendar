@@ -4,7 +4,7 @@ import { MarkdownRenderChild } from "obsidian";
 import { StrictMode } from "react";
 import { type Root, createRoot } from "react-dom/client";
 import Calendar from "./calendar/Calendar";
-import { getValuesFromSource } from "./expression";
+import { parseCalendarData } from "./code";
 
 // https://github.com/waynevanson/data-entry-obsidian-plugin
 export class ReactMarkdownRenderChild extends MarkdownRenderChild {
@@ -19,11 +19,11 @@ export class ReactMarkdownRenderChild extends MarkdownRenderChild {
 
 	async onload() {
 		try {
-			const expression = await getValuesFromSource(this.source);
+			const expression = await parseCalendarData(this.source);
 			this.root.render(
 				<StrictMode>
 					<div className="ob-embed-calendar">
-						<Calendar pages={expression.pages} />
+						<Calendar events={expression.events} />
 					</div>
 				</StrictMode>,
 			);
