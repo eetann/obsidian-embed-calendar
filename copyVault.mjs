@@ -2,15 +2,10 @@ import path from "node:path";
 import fsExtra from "fs-extra";
 
 const VAULT_PATH = process.env.VAULT_PATH;
-const PLUGIN_PATH = process.env.PLUGIN_PATH;
+const PLUGIN_PATH = `${VAULT_PATH}/.obsidian/plugins/obsidian-embed-calendar`;
 
 if (!VAULT_PATH) {
 	console.error("VAULT_PATH environment variable is not set.");
-	process.exit(1);
-}
-
-if (!PLUGIN_PATH) {
-	console.error("PLUGIN_PATH environment variable is not set.");
 	process.exit(1);
 }
 

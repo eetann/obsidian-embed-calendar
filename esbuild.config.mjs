@@ -12,8 +12,9 @@ if you want to view the source, please visit the github repository of this plugi
 `;
 
 const prod = process.argv[2] === "production";
-const pluginPath = process.env.PLUGIN_PATH;
-console.log(pluginPath);
+const VAULT_PATH = process.env.VAULT_PATH;
+const PLUGIN_PATH = `${VAULT_PATH}/.obsidian/plugins/obsidian-embed-calendar`;
+console.log(PLUGIN_PATH);
 
 const copyFiles = [
 	{ from: "dist/main.js", to: "main.js" },
@@ -26,10 +27,10 @@ const myCopy = {
 	setup(build) {
 		build.onEnd(async () => {
 			for (const copyFile of copyFiles) {
-				fs.copyFileSync(copyFile.from, path.join(pluginPath, copyFile.to));
+				fs.copyFileSync(copyFile.from, path.join(PLUGIN_PATH, copyFile.to));
 			}
 			if (!prod) {
-				fs.writeFileSync(path.join(pluginPath, ".hotreload"), "");
+				fs.writeFileSync(path.join(PLUGIN_PATH, ".hotreload"), "");
 			}
 		});
 	},
