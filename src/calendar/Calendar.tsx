@@ -28,17 +28,15 @@ type EventLinkProps = {
 
 function EventLink({ event }: EventLinkProps) {
 	return (
-		<span>
-			<a
-				target="_blank"
-				rel="noreferrer noopener"
-				className="internal-link text-white no-underline"
-				data-href={event.resource.link}
-				href={event.resource.link}
-			>
-				{event.title ?? "undefined"}
-			</a>
-		</span>
+		<a
+			target="_blank"
+			rel="noreferrer noopener"
+			className="internal-link text-white no-underline block"
+			data-href={event.resource.link}
+			href={event.resource.link}
+		>
+			{event.title ?? "undefined"}
+		</a>
 	);
 }
 
