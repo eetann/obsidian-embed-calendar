@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import type { Event } from "react-big-calendar";
+import type { Event as RbcEvent } from "react-big-calendar";
 
 async function executeScript(source: string) {
 	const script = source;
@@ -12,15 +12,25 @@ async function executeScript(source: string) {
 	return await func();
 }
 
-type RawEvent = {
+type Resouces = {
+	link: string;
+};
+
+type RawEvent = Resouces & {
 	title: string;
 	start: string;
 	end: string;
 	allDay?: boolean;
 };
 
+export interface Event extends RbcEvent {
+	resource: Resouces;
+}
+
 type Options = {
 	test?: boolean;
+	// TODO: moreのクリックでpopupかDayか
+	// https://jquense.github.io/react-big-calendar/examples/index.html?path=/docs/props--popup
 };
 
 type CalendarData = {
@@ -74,13 +84,15 @@ export async function parseCalendarData(source: string): Promise<CalendarData> {
 		}
 		// TODO: formatを指定する
 		events.push({
-			...event,
+			title: event.title,
 			start: dayjs(event.start).toDate(),
 			// TODO: endが無ければstartと同じにする
 			end: dayjs(event.end).toDate(),
+			resource: {
+				link: event.link,
+			},
 		});
 	}
-	console.log(events);
 	return {
 		events: events,
 		options: value.options,
