@@ -9,7 +9,9 @@
       end: p.file.frontmatter.endDateTime,
       allDay: false
     })),
-  options: {test: true}
+  options: {
+    defaultDate: {type: "fixed", date: "2024-08-01"},
+  }
 }
 ```
 # without Time
@@ -23,6 +25,6 @@
       end: p.file.frontmatter.endDate,
       allDay: true
     })),
-  options: {test: true}
+  options: {}
 }
 ```

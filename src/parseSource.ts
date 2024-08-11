@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import type { Event as RbcEvent } from "react-big-calendar";
-import { Options } from "./options";
+import { type Options, getOptions } from "./options";
 
 async function executeScript(source: string) {
 	const script = source;
@@ -98,6 +98,6 @@ export async function parseSource(source: string): Promise<CalendarData> {
 	}
 	return {
 		events: events,
-		options: value.options,
+		options: getOptions(value.options),
 	};
 }

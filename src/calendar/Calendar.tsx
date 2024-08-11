@@ -10,6 +10,7 @@ import {
 	type EventProps,
 } from "react-big-calendar";
 import type { Event } from "src/code";
+import { Options } from "src/options";
 
 const localizer = dayjsLocalizer(dayjs);
 
@@ -47,16 +48,17 @@ function EventComponentProps({ event }: EventProps) {
 
 type Props = {
 	events: Event[];
+	options: Options;
 };
 
-export default function Calendar({ events }: Props) {
-	// TODO: 今日か、固定か、frontmatterと紐づけか
-	const { defaultDate } = useMemo(
-		() => ({
-			defaultDate: dayjs("2024-08-05").toDate(),
-		}),
-		[],
-	);
+export default function Calendar({ events, options }: Props) {
+	const defaultDateType = options.defaultDate.type;
+	let defaultDate = dayjs().toDate();
+	if (defaultDateType === "fixed") {
+		defaultDate = options.defaultDate.date;
+	} else if (defaultDateType === "frontmatter") {
+		// TODO: frontmatterと紐づけ
+	}
 	const components = useMemo(
 		() => ({
 			event: (eventProps: EventProps) => EventComponentProps(eventProps),

@@ -19,11 +19,11 @@ export class ReactMarkdownRenderChild extends MarkdownRenderChild {
 
 	async onload() {
 		try {
-			const expression = await parseSource(this.source);
+			const { events, options } = await parseSource(this.source);
 			this.root.render(
 				<StrictMode>
 					<div className="ob-embed-calendar">
-						<Calendar events={expression.events} />
+						<Calendar events={events} options={options} />
 					</div>
 				</StrictMode>,
 			);
