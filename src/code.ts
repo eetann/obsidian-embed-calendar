@@ -83,11 +83,15 @@ export async function parseCalendarData(source: string): Promise<CalendarData> {
 			continue;
 		}
 		// TODO: formatを指定する
+		const end = event.end ? new Date(event.end) : new Date(event.start);
+		if (event.allDay && end.getHours() === 0) {
+			end.setHours(12); // 終日イベントのendが00:00だと表示されないため
+		}
 		events.push({
 			title: event.title,
 			start: dayjs(event.start).toDate(),
-			// TODO: endが無ければstartと同じにする
-			end: dayjs(event.end).toDate(),
+			end: end,
+			allDay: event.allDay,
 			resource: {
 				link: event.link,
 			},

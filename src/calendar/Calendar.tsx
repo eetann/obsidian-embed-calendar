@@ -3,7 +3,12 @@ import "dayjs/locale/ja";
 // Cannot get type if called directly `from "obsidian-dataview"`
 // import type { DataviewApi } from "obsidian-dataview/lib/api/plugin-api";
 import { useMemo } from "react";
-import { Calendar as BigCalendar, dayjsLocalizer } from "react-big-calendar";
+import {
+	Calendar as BigCalendar,
+	type Event as RbcEvent,
+	dayjsLocalizer,
+	type EventProps,
+} from "react-big-calendar";
 import type { Event } from "src/code";
 
 const localizer = dayjsLocalizer(dayjs);
@@ -22,11 +27,11 @@ const messages = {
 	agenda: "アジェンダ",
 };
 
-type EventLinkProps = {
+type EventComponentProps = {
 	event: Event;
 };
 
-function EventLink({ event }: EventLinkProps) {
+function EventComponentProps({ event }: EventProps) {
 	return (
 		<a
 			target="_blank"
@@ -46,12 +51,15 @@ type Props = {
 
 export default function Calendar({ events }: Props) {
 	// TODO: 今日か、固定か、frontmatterと紐づけか
-	const { components, defaultDate } = useMemo(
+	const { defaultDate } = useMemo(
 		() => ({
-			components: {
-				event: EventLink,
-			},
 			defaultDate: dayjs("2024-08-05").toDate(),
+		}),
+		[],
+	);
+	const components = useMemo(
+		() => ({
+			event: (eventProps: EventProps) => EventComponentProps(eventProps),
 		}),
 		[],
 	);
@@ -69,8 +77,8 @@ export default function Calendar({ events }: Props) {
 				culture="ja"
 				defaultDate={defaultDate}
 				events={events}
-				onSelectEvent={onSelectEvent}
 				components={components}
+				onSelectEvent={onSelectEvent}
 			/>
 		</div>
 	);
