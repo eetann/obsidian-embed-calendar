@@ -72,7 +72,23 @@ function isRawEvent(event: any): event is RawEvent {
 	return true;
 }
 
-export async function parseCalendarData(source: string): Promise<CalendarData> {
+function rawEventToEvent(event: RawEvent): Event {
+	const end = event.end ? new Date(event.end) : new Date(event.start);
+	if (event.allDay && end.getHours() === 0) {
+		end.setHours(12); // 終日イベントのendが00:00だと表示されないため
+	}
+	return {
+		title: event.title,
+		start: dayjs(event.start).toDate(),
+		end: end,
+		allDay: event.allDay,
+		resource: {
+			link: event.link,
+		},
+	};
+}
+
+export async function parseSource(source: string): Promise<CalendarData> {
 	const value = await executeScript(source);
 	if (!isRawCalendarData(value)) {
 		throw new Error("could't parse code");
@@ -82,20 +98,7 @@ export async function parseCalendarData(source: string): Promise<CalendarData> {
 		if (!isRawEvent(event)) {
 			continue;
 		}
-		// TODO: formatを指定する
-		const end = event.end ? new Date(event.end) : new Date(event.start);
-		if (event.allDay && end.getHours() === 0) {
-			end.setHours(12); // 終日イベントのendが00:00だと表示されないため
-		}
-		events.push({
-			title: event.title,
-			start: dayjs(event.start).toDate(),
-			end: end,
-			allDay: event.allDay,
-			resource: {
-				link: event.link,
-			},
-		});
+		events.push(rawEventToEvent(event));
 	}
 	return {
 		events: events,
