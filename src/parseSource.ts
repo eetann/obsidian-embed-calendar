@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import type { Event as RbcEvent } from "react-big-calendar";
+import { Options } from "./options";
 
 async function executeScript(source: string) {
 	const script = source;
@@ -26,12 +27,6 @@ type RawEvent = Resouces & {
 export interface Event extends RbcEvent {
 	resource: Resouces;
 }
-
-type Options = {
-	test?: boolean;
-	// TODO: moreのクリックでpopupかDayか
-	// https://jquense.github.io/react-big-calendar/examples/index.html?path=/docs/props--popup
-};
 
 type CalendarData = {
 	events: Event[];
@@ -74,6 +69,7 @@ function isRawEvent(event: any): event is RawEvent {
 
 function rawEventToEvent(event: RawEvent): Event {
 	const end = event.end ? new Date(event.end) : new Date(event.start);
+	// TODO: end < startの時のエラー
 	if (event.allDay && end.getHours() === 0) {
 		end.setHours(12); // 終日イベントのendが00:00だと表示されないため
 	}
