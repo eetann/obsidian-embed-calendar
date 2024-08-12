@@ -81,6 +81,8 @@ export default function Calendar({ events, options }: Props) {
 				events={events}
 				components={components}
 				onSelectEvent={onSelectEvent}
+				defaultView={options.defaultView}
+				views={["month", "week", "work_week", "day", "agenda"]}
 			/>
 		</div>
 	);

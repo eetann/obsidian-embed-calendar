@@ -1,24 +1,25 @@
 import dayjs from "dayjs";
 import * as v from "valibot";
 
-const defaultDateSchema = v.optional(
-	v.variant("type", [
-		v.object({ type: v.literal("today") }),
-		v.object({
-			type: v.literal("fixed"),
-			date: v.pipe(
-				v.string(),
-				v.transform((input) => dayjs(input).toDate()),
-			),
-		}),
-		// TODO: Implemented at src/calendar/Calendar.tsx
-		v.object({ type: v.literal("frontmatter"), key: v.string() }),
-	]),
-	{ type: "today" },
-);
+const defaultDateSchema = v.variant("type", [
+	v.object({ type: v.literal("today") }),
+	v.object({
+		type: v.literal("fixed"),
+		date: v.pipe(
+			v.string(),
+			v.transform((input) => dayjs(input).toDate()),
+		),
+	}),
+	// TODO: Implemented at src/calendar/Calendar.tsx
+	v.object({ type: v.literal("frontmatter"), key: v.string() }),
+]);
 
 const OptionsSchema = v.object({
-	defaultDate: defaultDateSchema,
+	defaultDate: v.optional(defaultDateSchema, { type: "today" }),
+	defaultView: v.optional(
+		v.picklist(["month", "week", "work_week", "day", "agenda"]),
+		"month",
+	),
 	// TODO: moreのクリックでpopupかDayか
 	// https://jquense.github.io/react-big-calendar/examples/index.html?path=/docs/props--popup
 });
