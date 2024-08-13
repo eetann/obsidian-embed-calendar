@@ -1,6 +1,7 @@
 import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
 import prefixSelector from "postcss-prefix-selector";
+import postcssNesting from "postcss-nesting";
 
 /** @type {import("postcss").Plugin} */
 function transformSelector(prefix, selector, prefixedSelector) {
@@ -24,6 +25,7 @@ export default {
 	plugins: [
 		tailwindcss({ config: "./tailwind.config.js" }),
 		autoprefixer({}),
+		postcssNesting(),
 		prefixSelector({
 			prefix: ".ob-embed-calendar",
 			transform: transformSelector,

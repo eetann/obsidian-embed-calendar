@@ -24,6 +24,7 @@
 		"obsidian": "latest",
 		"obsidian-dataview": "^0.5.67",
 		"postcss": "^8.4.40",
+		"postcss-nesting": "^13.0.0",
 		"postcss-prefix-selector": "^1.16.1",
 		"tailwindcss": "^3.4.7",
 		"tslib": "2.4.0",
