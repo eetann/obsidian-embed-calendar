@@ -75,6 +75,21 @@ export default function Calendar({ events, options }: Props) {
 				components={components}
 				defaultView={options.defaultView}
 				views={["month", "week", "work_week", "day", "agenda"]}
+				eventPropGetter={() => {
+					let fontSize = "text-xs";
+					switch (options.eventFontSize) {
+						case "sm":
+							fontSize = "text-sm";
+							break;
+						case "base":
+							fontSize = "text-base";
+							break;
+						case "lg":
+							fontSize = "text-lg";
+							break;
+					}
+					return { className: fontSize };
+				}}
 			/>
 		</div>
 	);

@@ -25,6 +25,8 @@
       end: p.file.frontmatter.endDate,
       allDay: true
     })),
-  options: {}
+	options: {
+		eventFontSize: "lg"
+	}
 }
 ```

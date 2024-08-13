@@ -20,6 +20,7 @@ const OptionsSchema = v.object({
 		v.picklist(["month", "week", "work_week", "day", "agenda"]),
 		"month",
 	),
+	eventFontSize: v.optional(v.picklist(["xs", "sm", "base", "lg"]), "xs"),
 	// TODO: moreのクリックでpopupかDayか
 	// https://jquense.github.io/react-big-calendar/examples/index.html?path=/docs/props--popup
 });
