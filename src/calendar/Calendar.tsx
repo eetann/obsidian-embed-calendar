@@ -3,26 +3,38 @@ import "dayjs/locale/ja";
 import { useMemo } from "react";
 import {
 	Calendar as BigCalendar,
-	type EventProps,
 	type EventWrapperProps,
+	type Formats,
+	type Messages,
 	dayjsLocalizer,
 } from "react-big-calendar";
 import type { Options } from "src/options";
 import type { Event } from "src/parseSource";
 import EventWrapper from "./EventWrapper";
+import "./overwrite.css";
 // Cannot get type if called directly `from "obsidian-dataview"`
 // import type { DataviewApi } from "obsidian-dataview/lib/api/plugin-api";
 
 const localizer = dayjsLocalizer(dayjs);
 
-const formats = {
-	monthHeaderFormat: "YYYY/MM",
+const formats: Formats = {
+	dayFormat: "MM/DD(ddd)",
+	monthHeaderFormat: "YYYY年MM月",
+	// dayRangeHeaderFormat: ""
+	timeGutterFormat: "HH:mm",
+	dayHeaderFormat: "MM月DD日(ddd)",
 };
 
-const messages = {
+const messages: Messages = {
+	date: "日時",
+	time: "時間",
+	event: "予定",
+	allDay: "終日",
 	next: "次",
 	previous: "前",
 	today: "今日",
+	yesterday: "昨日",
+	tomorrow: "明日",
 	month: "月",
 	week: "週",
 	work_week: "月～金",
@@ -52,7 +64,7 @@ export default function Calendar({ events, options }: Props) {
 	);
 
 	return (
-		<div className="h-[500px]">
+		<div className="h-[500px] bg-[var(--background-primary)]">
 			<BigCalendar
 				localizer={localizer}
 				formats={formats}

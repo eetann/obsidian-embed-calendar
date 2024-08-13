@@ -1,0 +1,15 @@
+/* https://docs.obsidian.md/Reference/CSS+variables/Foundations/Colors */
+.rbc-show-more {
+	background-color: var(--background-primary-alt);
+	color: var(--text-muted);
+
+	&:hover,
+	&:focus {
+		color: var(--text-normal);
+	}
+}
+
+/**/
+/* .rbc-toolbar button { */
+/*   color: var(--) */
+/* } */
