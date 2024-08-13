@@ -1,4 +1,41 @@
+@import "react-big-calendar/lib/css/react-big-calendar.css";
+
 /* https://docs.obsidian.md/Reference/CSS+variables/Foundations/Colors */
+.rbc-day-bg {
+	background-color: var(--background-secondary);
+}
+
+.rbc-off-range-bg {
+	background: var(--background-primary);
+}
+
+.rbc-toolbar button {
+	background-color: var(--background-primary);
+	color: var(--text-muted);
+
+	&:active,
+	&.rbc-active {
+		background-color: var(--background-secondary-alt);
+		color: var(--text-normal);
+
+		&:hover,
+		&:focus {
+			color: var(--text-normal);
+			background-color: var(--background-modifier-active-hover);
+		}
+	}
+
+	&:focus {
+		color: var(--text-normal);
+		background-color: var(--background-modifier-hover);
+	}
+
+	&:hover {
+		color: var(--text-normal);
+		background-color: var(--background-modifier-hover);
+	}
+}
+
 .rbc-show-more {
 	background-color: var(--background-primary-alt);
 	color: var(--text-muted);
@@ -8,8 +45,3 @@
 		color: var(--text-normal);
 	}
 }
-
-/**/
-/* .rbc-toolbar button { */
-/*   color: var(--) */
-/* } */
