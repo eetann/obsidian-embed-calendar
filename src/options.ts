@@ -44,7 +44,11 @@ export function getOptions(data: unknown): Options {
 	if (result.success) {
 		return result.output;
 	}
-	// TODO: 失敗時にissuesを投げる
-	console.log(result.issues);
-	throw new Error("Failed to parse optioins");
+	const messages = [];
+	for (const [key, value] of Object.entries(
+		v.flatten<typeof OptionsSchema>(result.issues).nested ?? {},
+	)) {
+		messages.push(`${key}: ${value.join("\n")}`);
+	}
+	throw new Error(`Failed to parse \`options\` \n\n${messages.join("\n")}`);
 }

@@ -28,7 +28,13 @@ export class ReactMarkdownRenderChild extends MarkdownRenderChild {
 			);
 		} catch (e) {
 			console.log(e);
-			// TODO: エラー用の表示を追加する
+			this.root.render(
+				<StrictMode>
+					<div className="ob-embed-calendar">
+						<pre>{String(e)}</pre>
+					</div>
+				</StrictMode>,
+			);
 		}
 	}
 
