@@ -70,8 +70,12 @@ export default function Calendar({ events, options }: Props) {
 	}, [options]);
 
 	return (
-		// TODO: 高さをオプション化
-		<div className="h-[500px] bg-[var(--background-primary)]">
+		<div
+			className="bg-[var(--background-primary)] overflow-scroll"
+			style={{
+				height: `${options.calendarHeight}px`,
+			}}
+		>
 			<BigCalendar
 				localizer={localizer}
 				formats={formats}

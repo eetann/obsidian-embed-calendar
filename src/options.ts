@@ -20,9 +20,16 @@ const OptionsSchema = v.object({
 		v.picklist(["month", "week", "work_week", "day", "agenda"]),
 		"month",
 	),
+	calendarHeight: v.optional(
+		v.pipe(
+			v.number(),
+			v.minValue(200, "Change `calendarHeight` to 200 or more"),
+		),
+		500,
+	),
 	eventFontSize: v.optional(v.picklist(["xs", "sm", "base", "lg"]), "xs"),
 	eventRowNumber: v.optional(
-		v.pipe(v.number(), v.minValue(0, "Change the number to 1 or more.")),
+		v.pipe(v.number(), v.minValue(0, "Change `eventRowNumber` to 1 or more.")),
 		1,
 	),
 	// TODO: moreのクリックでpopupかDayか

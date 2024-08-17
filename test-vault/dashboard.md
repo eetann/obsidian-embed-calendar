@@ -27,6 +27,7 @@
       allDay: true
     })),
 	options: {
+		calendarHeight: 700,
 		eventFontSize: "lg"
 	}
 }
