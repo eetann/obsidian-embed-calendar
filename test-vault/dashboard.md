@@ -12,6 +12,7 @@
   options: {
     defaultDate: {type: "fixed", date: "2024-08-01"},
 		eventRowNumber: 3,
+		language: "ja",
   }
 }
 ```

@@ -32,6 +32,7 @@ const OptionsSchema = v.object({
 		v.pipe(v.number(), v.minValue(0, "Change `eventRowNumber` to 1 or more.")),
 		1,
 	),
+	language: v.optional(v.picklist(["en", "ja"])),
 	// TODO: moreのクリックでpopupかDayか
 	// https://jquense.github.io/react-big-calendar/examples/index.html?path=/docs/props--popup
 });
