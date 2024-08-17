@@ -4,7 +4,21 @@ import prefixSelector from "postcss-prefix-selector";
 import postcssNesting from "postcss-nesting";
 
 /** @type {import("postcss").Plugin} */
-function transformSelector(prefix, selector, prefixedSelector) {
+function transformSelector(
+	prefix,
+	selector,
+	prefixedSelector,
+	_filePath,
+	rule,
+) {
+	const annotation = rule.prev();
+	if (
+		annotation?.type === "comment" &&
+		annotation.text.trim() === "no-prefix"
+	) {
+		return selector; // Do not prefix style rules that are preceded by: /* no-prefix */
+	}
+
 	if (selector.includes(".theme-dark")) {
 		return selector.replace(".theme-dark", `.theme-dark ${prefix}`);
 	}
