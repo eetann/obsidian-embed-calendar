@@ -36,6 +36,25 @@
 	}
 }
 
+/* no-prefix */
+html {
+	--rbc-event-row-number: 1;
+}
+
+.rbc-row-segment .rbc-event-content {
+	white-space: normal;
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: var(--rbc-event-row-number);
+}
+
+/* to display ";n show more"  */
+.rbc-month-row {
+	overflow: visible;
+}
+
 .rbc-show-more {
 	background-color: var(--background-primary-alt);
 	color: var(--text-muted);

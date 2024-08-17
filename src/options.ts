@@ -21,6 +21,10 @@ const OptionsSchema = v.object({
 		"month",
 	),
 	eventFontSize: v.optional(v.picklist(["xs", "sm", "base", "lg"]), "xs"),
+	eventRowNumber: v.optional(
+		v.pipe(v.number(), v.minValue(0, "Change the number to 1 or more.")),
+		1,
+	),
 	// TODO: moreのクリックでpopupかDayか
 	// https://jquense.github.io/react-big-calendar/examples/index.html?path=/docs/props--popup
 });

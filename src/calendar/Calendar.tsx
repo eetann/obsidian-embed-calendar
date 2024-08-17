@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import {
 	Calendar as BigCalendar,
 	type EventWrapperProps,
@@ -62,8 +62,15 @@ export default function Calendar({ events, options }: Props) {
 		}),
 		[],
 	);
+	useEffect(() => {
+		document.documentElement.style.setProperty(
+			"--rbc-event-row-number",
+			options.eventRowNumber.toString(),
+		);
+	}, [options]);
 
 	return (
+		// TODO: 高さをオプション化
 		<div className="h-[500px] bg-[var(--background-primary)]">
 			<BigCalendar
 				localizer={localizer}
