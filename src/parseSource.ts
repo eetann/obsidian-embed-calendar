@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import type { Event as RbcEvent } from "react-big-calendar";
-import { type Options, getOptions } from "./options";
+import { type OptionsType, getOptions } from "./options";
 
 async function executeScript(source: string) {
 	const script = source;
@@ -30,12 +30,12 @@ export interface Event extends RbcEvent {
 
 type CalendarData = {
 	events: Event[];
-	options: Options;
+	options: OptionsType;
 };
 
 type RawCalendarData = {
 	events: RawEvent[];
-	options: Options;
+	options: OptionsType;
 };
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>

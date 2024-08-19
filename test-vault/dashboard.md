@@ -11,7 +11,7 @@
     })),
   options: {
     defaultDate: {type: "fixed", date: "2024-08-01"},
-		eventRowNumber: 3,
+		eventRowType: {type: "auto", rowNumber: 2},
 		language: "ja",
   }
 }
@@ -30,6 +30,7 @@
 	options: {
 		calendarHeight: 700,
 		eventFontSize: "lg"
+		eventRowType: {type: "manual"},
 	}
 }
 ```

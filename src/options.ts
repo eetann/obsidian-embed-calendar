@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import * as v from "valibot";
 
-const defaultDateSchema = v.variant("type", [
+const DefaultDateSchema = v.variant("type", [
 	v.object({ type: v.literal("today") }),
 	v.object({
 		type: v.literal("fixed"),
@@ -14,8 +14,20 @@ const defaultDateSchema = v.variant("type", [
 	v.object({ type: v.literal("frontmatter"), key: v.string() }),
 ]);
 
+const EventRowTypeSchema = v.variant("type", [
+	v.object({ type: v.literal("oneLine") }),
+	v.object({
+		type: v.literal("auto"),
+		rowNumber: v.optional(
+			v.pipe(v.number(), v.minValue(0, "Change `rowNumber` to 1 or more.")),
+			2,
+		),
+	}),
+	v.object({ type: v.literal("manual") }),
+]);
+
 const OptionsSchema = v.object({
-	defaultDate: v.optional(defaultDateSchema, { type: "today" }),
+	defaultDate: v.optional(DefaultDateSchema, { type: "today" }),
 	defaultView: v.optional(
 		v.picklist(["month", "week", "work_week", "day", "agenda"]),
 		"month",
@@ -28,18 +40,15 @@ const OptionsSchema = v.object({
 		500,
 	),
 	eventFontSize: v.optional(v.picklist(["xs", "sm", "base", "lg"]), "xs"),
-	eventRowNumber: v.optional(
-		v.pipe(v.number(), v.minValue(0, "Change `eventRowNumber` to 1 or more.")),
-		1,
-	),
+	eventRowType: v.optional(EventRowTypeSchema, { type: "oneLine" }),
 	language: v.optional(v.picklist(["en", "ja"])),
 	// TODO: moreのクリックでpopupかDayか
 	// https://jquense.github.io/react-big-calendar/examples/index.html?path=/docs/props--popup
 });
 
-export type Options = v.InferOutput<typeof OptionsSchema>;
+export type OptionsType = v.InferOutput<typeof OptionsSchema>;
 
-export function getOptions(data: unknown): Options {
+export function getOptions(data: unknown): OptionsType {
 	const result = v.safeParse(OptionsSchema, data);
 	if (result.success) {
 		return result.output;

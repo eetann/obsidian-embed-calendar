@@ -1,24 +1,24 @@
 import dayjs from "dayjs";
 import { useEffect, useMemo } from "react";
-import {
-	Calendar as BigCalendar,
-	type EventWrapperProps,
-	dayjsLocalizer,
-} from "react-big-calendar";
-import type { Options } from "src/options";
+import { Calendar as BigCalendar, dayjsLocalizer } from "react-big-calendar";
+import type { OptionsType } from "src/options";
 import type { Event } from "src/parseSource";
 import EventWrapper from "./EventWrapper";
 import "./overwrite.css";
+import { applyRowTypeStyle } from "./eventRowType";
 import { cultures } from "./localization";
 
 const localizer = dayjsLocalizer(dayjs);
 
 type Props = {
 	events: Event[];
-	options: Options;
+	options: OptionsType;
 };
 
 export default function Calendar({ events, options }: Props) {
+	// To set CSS variables for each Calendar
+	const calendarId = crypto.randomUUID();
+
 	const lang = options.language;
 	const defaultDateType = options.defaultDate.type;
 	let defaultDate = dayjs().toDate();
@@ -29,20 +29,18 @@ export default function Calendar({ events, options }: Props) {
 	}
 	const components = useMemo(
 		() => ({
-			eventWrapper: (eventWrapperProps: EventWrapperProps) =>
-				EventWrapper(eventWrapperProps),
+			eventWrapper: EventWrapper,
 		}),
 		[],
 	);
 	useEffect(() => {
-		document.documentElement.style.setProperty(
-			"--rbc-event-row-number",
-			options.eventRowNumber.toString(),
-		);
-	}, [options]);
+		console.log(options.eventRowType);
+		applyRowTypeStyle(calendarId, options.eventRowType);
+	}, [options, calendarId]);
 
 	return (
 		<div
+			id={calendarId}
 			className="bg-[var(--background-primary)] overflow-scroll"
 			style={{
 				height: `${options.calendarHeight}px`,

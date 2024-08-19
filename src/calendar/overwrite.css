@@ -38,19 +38,24 @@
 
 /* no-prefix */
 html {
-	--rbc-event-row-number: 1;
+	--rbc-event-row-display: block;
+	--rbc-event-row-overflow: hidden;
+	--rbc-event-row-text-overflow: ellipsis;
+	--rbc-event-row-white-space: nowrap;
+	--rbc-event-row--webkit-box-orient: horizontal;
+	--rbc-event-row--webkit-line-clamp: none;
 }
 
 .rbc-row-segment .rbc-event-content {
-	white-space: normal;
-	display: -webkit-box;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: var(--rbc-event-row-number);
+	display: var(--rbc-event-row-display);
+	overflow: var(--rbc-event-row-overflow);
+	text-overflow: var(--rbc-event-row-text-overflow);
+	white-space: var(--rbc-event-row-white-space);
+	-webkit-box-orient: var(--rbc-event-row--webkit-box-orient);
+	-webkit-line-clamp: var(--rbc-event-row--webkit-line-clamp);
 }
 
-/* to display ";n show more"  */
+/* to display "+n show more"  */
 .rbc-month-row {
 	overflow: visible;
 }
