@@ -4,6 +4,7 @@ import { StrictMode } from "react";
 import { type Root, createRoot } from "react-dom/client";
 import Calendar from "./calendar/Calendar";
 import { parseSource } from "./parseSource";
+import { DnDContextProvider } from "./calendar/context";
 
 // https://github.com/waynevanson/data-entry-obsidian-plugin
 export class ReactMarkdownRenderChild extends MarkdownRenderChild {
@@ -22,7 +23,9 @@ export class ReactMarkdownRenderChild extends MarkdownRenderChild {
 			this.root.render(
 				<StrictMode>
 					<div className="ob-embed-calendar">
-						<Calendar events={events} options={options} />
+						<DnDContextProvider>
+							<Calendar events={events} options={options} />
+						</DnDContextProvider>
 					</div>
 				</StrictMode>,
 			);

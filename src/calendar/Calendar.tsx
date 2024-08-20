@@ -1,13 +1,16 @@
 import dayjs from "dayjs";
 import { useEffect, useMemo } from "react";
 import { Calendar as BigCalendar, dayjsLocalizer } from "react-big-calendar";
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import type { OptionsType } from "src/options";
 import type { Event } from "src/parseSource";
 import EventWrapper from "./EventWrapper";
 import "./overwrite.css";
 import { applyRowTypeStyle } from "./eventRowType";
 import { cultures } from "./localization";
+import { useDnDContext } from "./context";
 
+const DnDCalendar = withDragAndDrop(BigCalendar);
 const localizer = dayjsLocalizer(dayjs);
 
 type Props = {
@@ -18,6 +21,7 @@ type Props = {
 export default function Calendar({ events, options }: Props) {
 	// To set CSS variables for each Calendar
 	const calendarId = crypto.randomUUID();
+	const { setIsDrag } = useDnDContext();
 
 	const lang = options.language;
 	const defaultDateType = options.defaultDate.type;
@@ -34,7 +38,6 @@ export default function Calendar({ events, options }: Props) {
 		[],
 	);
 	useEffect(() => {
-		console.log(options.eventRowType);
 		applyRowTypeStyle(calendarId, options.eventRowType);
 	}, [options, calendarId]);
 
@@ -46,7 +49,8 @@ export default function Calendar({ events, options }: Props) {
 				height: `${options.calendarHeight}px`,
 			}}
 		>
-			<BigCalendar
+			<DnDCalendar
+				draggableAccessor={(event) => true}
 				localizer={localizer}
 				// TODO: formatsは上書きできるようにする
 				formats={lang ? cultures[lang]?.formats : undefined}
@@ -74,6 +78,8 @@ export default function Calendar({ events, options }: Props) {
 					}
 					return { className: fontSize };
 				}}
+				onDragStart={() => setIsDrag(true)}
+				onEventDrop={() => setIsDrag(false)}
 			/>
 		</div>
 	);
