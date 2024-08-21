@@ -48,4 +48,5 @@ npm run watch
 - [x] titleの改行を有効化
 - [ ] D&Dによる日時変更
 - [ ] 新しいノートの作成
-- [ ] 
+- [ ] テストの追加
+  - [ ] 参考: https://github.com/ycnmhd/obsidian-lineage
