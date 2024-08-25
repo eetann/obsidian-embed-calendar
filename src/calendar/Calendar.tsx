@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { useEffect, useMemo } from "react";
 import { Calendar as BigCalendar, dayjsLocalizer } from "react-big-calendar";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
-import type { OptionsType } from "src/options";
+import type { OptionsType } from "src/calendar/schema/options";
 import type { Event } from "src/parseSource";
 import EventWrapper from "./EventWrapper";
 import "./overwrite.css";

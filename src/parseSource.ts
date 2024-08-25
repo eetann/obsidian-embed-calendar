@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import type { Event as RbcEvent } from "react-big-calendar";
-import { type OptionsType, getOptions } from "./options";
+import { type OptionsType, getOptions } from "./calendar/schema/options";
 
 async function executeScript(source: string) {
 	const script = source;
@@ -66,7 +66,6 @@ function isRawEvent(event: any): event is RawEvent {
 	}
 	return true;
 }
-
 function rawEventToEvent(event: RawEvent): Event {
 	const end = event.end ? new Date(event.end) : new Date(event.start);
 	// TODO: end < startの時のエラー
@@ -89,6 +88,7 @@ export async function parseSource(source: string): Promise<CalendarData> {
 	if (!isRawCalendarData(value)) {
 		throw new Error("could't parse code");
 	}
+	const options = getOptions(value.options);
 	const events: Event[] = [];
 	for (const event of value.events) {
 		if (!isRawEvent(event)) {
@@ -96,8 +96,5 @@ export async function parseSource(source: string): Promise<CalendarData> {
 		}
 		events.push(rawEventToEvent(event));
 	}
-	return {
-		events: events,
-		options: getOptions(value.options),
-	};
+	return { events, options };
 }

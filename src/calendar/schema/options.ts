@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import * as v from "valibot";
+import { getMessages } from "./utils";
 
 const DefaultDateSchema = v.variant("type", [
 	v.object({ type: v.literal("today") }),
@@ -26,7 +27,16 @@ const EventRowTypeSchema = v.variant("type", [
 	v.object({ type: v.literal("manual") }),
 ]);
 
+const DateKeySchema = v.object({
+	key: v.pipe(v.string(), v.nonEmpty()),
+	// If other than ISO 8601, specify format
+	// default: YYYY-MM-DD, YYYY-MM-DDTHH:mm:ss etc.
+	format: v.optional(v.string()),
+});
+
 const OptionsSchema = v.object({
+	start: DateKeySchema,
+	end: v.optional(DateKeySchema),
 	defaultDate: v.optional(DefaultDateSchema, { type: "today" }),
 	defaultView: v.optional(
 		v.picklist(["month", "week", "work_week", "day", "agenda"]),
@@ -53,11 +63,7 @@ export function getOptions(data: unknown): OptionsType {
 	if (result.success) {
 		return result.output;
 	}
-	const messages = [];
-	for (const [key, value] of Object.entries(
-		v.flatten<typeof OptionsSchema>(result.issues).nested ?? {},
-	)) {
-		messages.push(`${key}: ${value.join("\n")}`);
-	}
-	throw new Error(`Failed to parse \`options\` \n\n${messages.join("\n")}`);
+	throw new Error(
+		`Failed to parse \`options\` \n\n${getMessages(result.issues)}`,
+	);
 }

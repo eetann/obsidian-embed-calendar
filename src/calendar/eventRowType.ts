@@ -1,4 +1,4 @@
-import type { OptionsType } from "src/options";
+import type { OptionsType } from "src/calendar/schema/options";
 
 /* ref: src/calendar/overwrite.css */
 
