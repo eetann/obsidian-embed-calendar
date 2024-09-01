@@ -1,14 +1,16 @@
 import dayjs from "dayjs";
 import { useEffect, useMemo } from "react";
 import { Calendar as BigCalendar, dayjsLocalizer } from "react-big-calendar";
-import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
+import withDragAndDrop, {
+	type withDragAndDropProps,
+} from "react-big-calendar/lib/addons/dragAndDrop";
 import type { OptionsType } from "src/calendar/schema/options";
 import type { Event } from "src/parseSource";
 import EventWrapper from "./EventWrapper";
 import "./overwrite.css";
+import { useDnDContext } from "./context";
 import { applyRowTypeStyle } from "./eventRowType";
 import { cultures } from "./localization";
-import { useDnDContext } from "./context";
 
 const DnDCalendar = withDragAndDrop(BigCalendar);
 const localizer = dayjsLocalizer(dayjs);
@@ -40,6 +42,18 @@ export default function Calendar({ events, options }: Props) {
 	useEffect(() => {
 		applyRowTypeStyle(calendarId, options.eventRowType);
 	}, [options, calendarId]);
+
+	const onEventDrop: withDragAndDropProps["onEventDrop"] = ({
+		event,
+		start,
+		end,
+	}) => {
+		// TODO: スタートの書き換え
+		// TODO: frontmatterを書き換えるには file が必要かも
+		// event.start
+		// TODO: endの書き換え
+		setIsDrag(false);
+	};
 
 	return (
 		<div
@@ -79,7 +93,7 @@ export default function Calendar({ events, options }: Props) {
 					return { className: fontSize };
 				}}
 				onDragStart={() => setIsDrag(true)}
-				onEventDrop={() => setIsDrag(false)}
+				onEventDrop={onEventDrop}
 			/>
 		</div>
 	);
