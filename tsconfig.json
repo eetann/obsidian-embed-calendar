@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
+		"baseUrl": "./src/",
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"inlineSourceMap": true,
