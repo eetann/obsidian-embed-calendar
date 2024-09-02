@@ -1,4 +1,4 @@
-import type { DateTime } from "./dateTime/date";
+import type { DateTime } from "./dateTime/dateTime";
 import type { Metadata } from "./metadata/metadata";
 import type { Path } from "./path/path";
 import type { Title } from "./title/title";
@@ -12,7 +12,7 @@ export class Event {
 		private _metadata: Metadata,
 	) {}
 
-	static create(
+	static reconstruct(
 		path: Path,
 		title: Title,
 		startDateTime: DateTime,
