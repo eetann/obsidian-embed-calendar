@@ -1,4 +1,4 @@
-import { ValueObject } from "domain/model/shared/valueObject";
+import { ValueObject } from "@/domain/model/shared/valueObject";
 
 export class Path extends ValueObject<string, "Path"> {
 	validate(path: string): void {

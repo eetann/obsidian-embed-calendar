@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"baseUrl": "./src/",
+		"baseUrl": "./",
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"inlineSourceMap": true,
@@ -15,6 +15,9 @@
 		"strictNullChecks": true,
 		"lib": ["DOM", "ES5", "ES6", "ES7"],
 		"jsx": "react-jsx",
+		"paths": {
+			"@/*": ["src/*"]
+		},
 		"types": ["vitest/globals"]
 	},
 	"include": ["**/*.ts", "**/*.tsx"]

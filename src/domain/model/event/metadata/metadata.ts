@@ -1,4 +1,4 @@
-import { ValueObject } from "domain/model/shared/valueObject";
+import { ValueObject } from "@/domain/model/shared/valueObject";
 
 type MetadataType = undefined | string | HTMLElement;
 

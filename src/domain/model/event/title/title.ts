@@ -1,4 +1,4 @@
-import { ValueObject } from "domain/model/shared/valueObject";
+import { ValueObject } from "@/domain/model/shared/valueObject";
 
 export class Title extends ValueObject<string, "Title"> {
 	validate(title: string): void {

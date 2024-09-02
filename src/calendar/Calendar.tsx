@@ -4,8 +4,8 @@ import { Calendar as BigCalendar, dayjsLocalizer } from "react-big-calendar";
 import withDragAndDrop, {
 	type withDragAndDropProps,
 } from "react-big-calendar/lib/addons/dragAndDrop";
-import type { OptionsType } from "src/calendar/schema/options";
-import type { Event } from "src/parseSource";
+import type { OptionsType } from "@/calendar/schema/options";
+import type { Event } from "@/parseSource";
 import EventWrapper from "./EventWrapper";
 import "./overwrite.css";
 import { useDnDContext } from "./context";

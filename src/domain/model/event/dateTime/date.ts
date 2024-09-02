@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { ValueObject } from "domain/model/shared/valueObject";
+import { ValueObject } from "@/domain/model/shared/valueObject";
 
 type DateTimeType = {
 	dateTime: string;
