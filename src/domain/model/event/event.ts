@@ -19,9 +19,17 @@ export class Event {
 		endDateTime: DateTime,
 		metadata: Metadata,
 	) {
+		Event.validate(startDateTime, endDateTime);
 		return new Event(path, title, startDateTime, endDateTime, metadata);
 	}
 
+	static validate(startDateTime: DateTime, endDateTime: DateTime): void {
+		if (startDateTime.dateTime.isAfter(endDateTime.dateTime)) {
+			throw new Error("startDateTime should be past endDateTime");
+		}
+	}
+
+	// TODO: allDayとして変更なのか、日時なのか分岐
 	changeStartDateTime(dateTime: DateTime) {
 		this._startDateTime = dateTime;
 	}

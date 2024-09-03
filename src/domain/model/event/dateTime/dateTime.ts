@@ -1,23 +1,21 @@
-import dayjs from "dayjs";
 import { ValueObject } from "@/domain/model/shared/valueObject";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 type DateTimeType = {
-	dateTime: string;
+	date: string;
 	format: string;
 };
 
 export class DateTime extends ValueObject<DateTimeType, "DateTime"> {
 	validate(value: DateTimeType): void {
-		if (!dayjs(value.dateTime).isValid()) {
+		if (!dayjs(value.date).isValid()) {
 			throw new Error("DateTime is not valid");
 		}
 	}
 
 	get dateTime() {
-		return dayjs(this.value.dateTime, this.value.format);
-	}
-
-	get format() {
-		return this.value.format;
+		return dayjs(this.value.date, this.value.format);
 	}
 }
