@@ -9,6 +9,7 @@ export class Event {
 		private _title: Title,
 		private _startDateTime: DateTime,
 		private _endDateTime: DateTime,
+		private _allDay: boolean,
 		private _metadata: Metadata,
 	) {}
 
@@ -17,25 +18,27 @@ export class Event {
 		title: Title,
 		startDateTime: DateTime,
 		endDateTime: DateTime,
+		allDay: boolean,
 		metadata: Metadata,
 	) {
 		Event.validate(startDateTime, endDateTime);
-		return new Event(path, title, startDateTime, endDateTime, metadata);
+		return new Event(path, title, startDateTime, endDateTime, allDay, metadata);
 	}
 
-	static validate(startDateTime: DateTime, endDateTime: DateTime): void {
+	private static validate(
+		startDateTime: DateTime,
+		endDateTime: DateTime,
+	): void {
 		if (startDateTime.dateTime.isAfter(endDateTime.dateTime)) {
 			throw new Error("startDateTime should be past endDateTime");
 		}
 	}
 
-	// TODO: allDayとして変更なのか、日時なのか分岐
-	changeStartDateTime(dateTime: DateTime) {
-		this._startDateTime = dateTime;
-	}
-
-	changeEndDateTime(dateTime: DateTime) {
-		this._endDateTime = dateTime;
+	// TODO: allDayとして変更なのか、日時なのか分岐(Rbcの都合なのでASでやる)
+	changeDateTime(startDateTime: DateTime, endDateTime: DateTime) {
+		Event.validate(startDateTime, endDateTime);
+		this._startDateTime = startDateTime;
+		this._endDateTime = endDateTime;
 	}
 
 	get path() {
@@ -52,6 +55,10 @@ export class Event {
 
 	get endDateTime() {
 		return this._endDateTime;
+	}
+
+	get allDay() {
+		return this._allDay;
 	}
 
 	get metadata() {
