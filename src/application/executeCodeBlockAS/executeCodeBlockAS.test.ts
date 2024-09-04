@@ -1,5 +1,5 @@
+import { MockDataviewApi } from "@/application/shared/MockDataviewApi";
 import { ExecuteCodeBlockAS } from "./executeCodeBlockAS";
-import { MockDataviewApi } from "./shared/MockDataviewApi";
 
 describe("ExecuteCodeBlockAS", () => {
 	beforeEach(() => {
