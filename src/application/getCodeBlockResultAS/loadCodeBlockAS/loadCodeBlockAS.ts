@@ -1,4 +1,4 @@
-export class ExecuteCodeBlockAS {
+export class LoadCodeBlockAS {
 	async execute(source: string) {
 		try {
 			const func = new Function(

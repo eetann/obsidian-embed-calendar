@@ -1,7 +1,7 @@
 import { MockDataviewApi } from "@/application/shared/MockDataviewApi";
-import { ExecuteCodeBlockAS } from "./executeCodeBlockAS";
+import { LoadCodeBlockAS } from "./loadCodeBlockAS";
 
-describe("ExecuteCodeBlockAS", () => {
+describe("LoadCodeBlockAS", () => {
 	beforeEach(() => {
 		const DataviewAPI = new MockDataviewApi();
 		vi.stubGlobal("DataviewAPI", DataviewAPI);
@@ -15,17 +15,17 @@ describe("ExecuteCodeBlockAS", () => {
     })),
   options: {}
 }`;
-	const executeCodeBlockAS = new ExecuteCodeBlockAS();
+	const loadCodeBlockAS = new LoadCodeBlockAS();
 
 	it("Can be created successfully", async () => {
 		await expect(
-			executeCodeBlockAS.execute(codeBlock),
+			loadCodeBlockAS.execute(codeBlock),
 		).resolves.not.toThrowError();
 	});
 
 	it("Error when there is no Dataview", async () => {
 		vi.unstubAllGlobals();
-		await expect(executeCodeBlockAS.execute(codeBlock)).rejects.toThrow(
+		await expect(loadCodeBlockAS.execute(codeBlock)).rejects.toThrow(
 			"Please install Dataview plugin",
 		);
 	});
