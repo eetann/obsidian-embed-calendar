@@ -18,7 +18,7 @@ type CodeBlockEvent = {
 	allDay: boolean;
 	metadata: MetadataType;
 };
-export class CreateEventAS {
+export class ReconstructEventAS {
 	private _options: OptionsType;
 	constructor(options: OptionsType) {
 		this._options = options;

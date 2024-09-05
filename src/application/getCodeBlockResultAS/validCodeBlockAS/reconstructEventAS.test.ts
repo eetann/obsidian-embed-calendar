@@ -1,6 +1,6 @@
-import { CreateEventAS } from "./createEventAS";
+import { ReconstructEventAS } from "./reconstructEventAS";
 
-describe("createEventAS", () => {
+describe("ReconstructEventAS", () => {
 	const defaultOptions = {
 		dateFormat: "YYYY-MM-DD",
 		startKey: "start",
@@ -23,21 +23,21 @@ describe("createEventAS", () => {
 		allDay: true,
 		metadata: undefined,
 	};
-	const createEventAS = new CreateEventAS(defaultOptions);
+	const reconstructEventAS = new ReconstructEventAS(defaultOptions);
 
 	it("Event is created when a valid value is entered", () => {
-		const event = createEventAS.execute(codeBlockEvent);
+		const event = reconstructEventAS.execute(codeBlockEvent);
 		expect(event.path).not.toBeNull();
 	});
 
 	it("If there is no endKey, it is the same as startKey.", () => {
-		const event = createEventAS.execute(codeBlockEvent);
+		const event = reconstructEventAS.execute(codeBlockEvent);
 		expect(event.endDateTime).toEqual(event.startDateTime);
 	});
 
 	it("If endKey is specified, the date will be the date specified by endKey, not startKey", () => {
 		const options = { ...defaultOptions, endKey: "end" };
-		const createEventAS = new CreateEventAS(options);
+		const reconstructEventAS = new ReconstructEventAS(options);
 		const codeBlockEvent = {
 			file: {
 				path: "foo.md",
@@ -51,7 +51,7 @@ describe("createEventAS", () => {
 			allDay: true,
 			metadata: undefined,
 		};
-		const event = createEventAS.execute(codeBlockEvent);
+		const event = reconstructEventAS.execute(codeBlockEvent);
 		expect(event.endDateTime).not.toEqual(event.startDateTime);
 	});
 });
