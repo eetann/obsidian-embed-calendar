@@ -1,26 +1,34 @@
+import { Event } from "@/domain/model/event/event";
 import { ValidCodeBlockEventsAS } from "./validCodeBlockEventsAS";
 
 describe("ValidCodeBlockEventsAS", () => {
-	describe("#execute", () => {
-		it("should return an array of events when given valid input data", () => {
-			const result = new ValidCodeBlockEventsAS().execute([
-				{
-					file: {
-						path: "foo.md",
-						frontmatter: { title: "example", start: "2024-09-05" },
-					},
-					title: "example",
+	const options = {
+		dateFormat: "YYYY-MM-DD",
+		startKey: "start",
+		defaultDate: { type: "today" },
+		defaultView: "month",
+		calendarHeight: 500,
+		eventFontSize: "xs",
+		eventRowType: { type: "oneLine" },
+		language: "en",
+	} as const;
+	it("should return an array of Event when given valid input data", () => {
+		const events = new ValidCodeBlockEventsAS(options).execute([
+			{
+				file: {
+					path: "foo.md",
+					frontmatter: { title: "example", start: "2024-09-05" },
 				},
-			]);
-			expect(result).toBeTypeOf("object");
-			expect(result[0].file.path).toBe("foo.md");
-			expect(result[0].file).toHaveProperty("frontmatter");
-			expect(result[0].title).toBe("example");
-			expect(result[0].allDay).toBeTruthy();
-		});
+				title: "example",
+			},
+		]);
+		expect(events).toBeTypeOf("object");
+		expect(events[0]).toBeInstanceOf(Event);
+	});
 
-		it("should throw an error when given invalid input data", () => {
-			expect(() => new ValidCodeBlockEventsAS().execute({})).toThrowError();
-		});
+	it("should throw an error when given invalid input data", () => {
+		expect(() =>
+			new ValidCodeBlockEventsAS(options).execute({}),
+		).toThrowError();
 	});
 });

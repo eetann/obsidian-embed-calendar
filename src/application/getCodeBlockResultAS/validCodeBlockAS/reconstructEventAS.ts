@@ -16,7 +16,7 @@ type CodeBlockEvent = {
 	};
 	title: string;
 	allDay: boolean;
-	metadata: MetadataType;
+	metadata?: MetadataType;
 };
 export class ReconstructEventAS {
 	private _options: OptionsType;
