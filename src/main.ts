@@ -10,19 +10,22 @@ const DEFAULT_SETTINGS: EmbedCalendarSettings = {
 };
 
 export default class EmbedCalendar extends Plugin {
+	private _language = "embed-calendar";
 	settings: EmbedCalendarSettings;
 
 	async onload() {
 		await this.loadSettings();
 
 		this.registerMarkdownCodeBlockProcessor(
-			"embed-calendar",
+			this._language,
 			async (source, element, context) => {
 				const container = element.createEl("div");
 				const renderer = new ReactMarkdownRenderChild(container, source);
 				context.addChild(renderer);
 			},
 		);
+		this.registerCodeBlockHighlithing();
+		this.register(() => this.unregisterCodeBlockHighlithing());
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new EmbedCalendarSettingTab(this.app, this));
@@ -34,6 +37,17 @@ export default class EmbedCalendar extends Plugin {
 
 	async saveSettings() {
 		await this.saveData(this.settings);
+	}
+
+	registerCodeBlockHighlithing() {
+		window.CodeMirror.defineMode(this._language, (config) =>
+			window.CodeMirror.getMode(config, "javascript"),
+		);
+	}
+	unregisterCodeBlockHighlithing() {
+		window.CodeMirror.defineMode(this._language, (config) =>
+			window.CodeMirror.getMode(config, "null"),
+		);
 	}
 }
 
