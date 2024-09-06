@@ -15,6 +15,12 @@ return ${source};
 			) {
 				throw Error("Please install Dataview plugin");
 			}
+			if (err instanceof SyntaxError) {
+				throw Error(
+					`Syntax error. Please refer to the following to correct.\n${err.message}`,
+				);
+			}
+			throw Error(err);
 		}
 	}
 }

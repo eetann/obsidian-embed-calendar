@@ -29,4 +29,14 @@ describe("CodeBlockLoader", () => {
 			"Please install Dataview plugin",
 		);
 	});
+
+	it("Indicate when there is a syntax error", async () => {
+		const codeBlock = `{
+			events: [] // <- without comma
+			options: {}
+		}`;
+		await expect(codeBlockLoader.execute(codeBlock)).rejects.toThrow(
+			"Syntax error. Please refer to the following to correct.",
+		);
+	});
 });
