@@ -1,5 +1,5 @@
 import "./app.css";
-import { GetCodeBlockResultAS } from "@/application/getCodeBlockResultAS/getCodeBlockResultAS";
+import { GetCodeBlockResultUseCase } from "@/usecase/getCodeBlockResultUseCase/getCodeBlockResultUseCase";
 import { MarkdownRenderChild } from "obsidian";
 import { StrictMode } from "react";
 import { type Root, createRoot } from "react-dom/client";
@@ -19,7 +19,7 @@ export class ReactMarkdownRenderChild extends MarkdownRenderChild {
 
 	async onload() {
 		try {
-			const { options, events } = await new GetCodeBlockResultAS().execute(
+			const { options, events } = await new GetCodeBlockResultUseCase().execute(
 				this.source,
 			);
 			this.root.render(

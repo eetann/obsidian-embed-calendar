@@ -1,4 +1,4 @@
-import type { OptionsType } from "@/application/getCodeBlockResultAS/validCodeBlockAS/validCodeBlockOptionsAS";
+import type { OptionsType } from "@/usecase/getCodeBlockResultUseCase/codeBlockValidator/optionsValidator";
 import type { Event } from "@/domain/model/event/event";
 import dayjs from "dayjs";
 import { useEffect, useMemo } from "react";

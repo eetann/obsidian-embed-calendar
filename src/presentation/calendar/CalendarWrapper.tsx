@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { type ReactNode, useEffect } from "react";
 import "./overwrite.css";
-import type { OptionsType } from "@/application/getCodeBlockResultAS/validCodeBlockAS/validCodeBlockOptionsAS";
+import type { OptionsType } from "@/usecase/getCodeBlockResultUseCase/codeBlockValidator/optionsValidator";
 import { DnDContextProvider } from "./provider/DnDContextProvider";
 import { applyRowTypeStyle } from "./rbcCalendar/applyRowTypeStyle";
 
