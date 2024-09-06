@@ -1,7 +1,7 @@
-import { ValidCodeBlockAS } from "./validCodeBlockAS";
+import { CodeBlockValidator } from "./codeBlockValidator";
 
-describe("ValidCodeBlockAS", () => {
-	const validCodeBlockAS = new ValidCodeBlockAS();
+describe("CodeBlockValidator", () => {
+	const codeBlockValidator = new CodeBlockValidator();
 	it("Passing the correct value returns the value", () => {
 		const data = {
 			events: [
@@ -18,12 +18,12 @@ describe("ValidCodeBlockAS", () => {
 				startKey: "start",
 			},
 		};
-		const result = validCodeBlockAS.execute(data);
+		const result = codeBlockValidator.execute(data);
 		expect(result.options).toBeTruthy();
 		expect(result.events).toBeTruthy();
 	});
 	it("Error when passing wrong", () => {
 		const data = {};
-		expect(() => validCodeBlockAS.execute(data)).toThrowError();
+		expect(() => codeBlockValidator.execute(data)).toThrowError();
 	});
 });

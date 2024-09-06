@@ -1,7 +1,7 @@
 import { Event } from "@/domain/model/event/event";
-import { ValidCodeBlockEventsAS } from "./validCodeBlockEventsAS";
+import { EventsValidator } from "./eventsValidator";
 
-describe("ValidCodeBlockEventsAS", () => {
+describe("EventsValidator", () => {
 	const options = {
 		dateFormat: "YYYY-MM-DD",
 		startKey: "start",
@@ -13,7 +13,7 @@ describe("ValidCodeBlockEventsAS", () => {
 		language: "en",
 	} as const;
 	it("should return an array of Event when given valid input data", () => {
-		const events = new ValidCodeBlockEventsAS(options).execute([
+		const events = new EventsValidator(options).execute([
 			{
 				file: {
 					path: "foo.md",
@@ -27,8 +27,6 @@ describe("ValidCodeBlockEventsAS", () => {
 	});
 
 	it("should throw an error when given invalid input data", () => {
-		expect(() =>
-			new ValidCodeBlockEventsAS(options).execute({}),
-		).toThrowError();
+		expect(() => new EventsValidator(options).execute({})).toThrowError();
 	});
 });

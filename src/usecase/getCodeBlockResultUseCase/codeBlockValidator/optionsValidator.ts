@@ -1,4 +1,4 @@
-import { getMessages } from "@/application/shared/utilValibot";
+import { getMessages } from "@/usecase/shared/utilValibot";
 import * as v from "valibot";
 
 const NonEmptySchema = v.pipe(
@@ -65,7 +65,7 @@ const OptionsSchema = v.object({
 
 export type OptionsType = v.InferOutput<typeof OptionsSchema>;
 
-export class ValidCodeBlockOptionsAS {
+export class OptionsValidator {
 	execute(data: unknown): OptionsType {
 		const result = v.safeParse(OptionsSchema, data);
 		if (result.success) {

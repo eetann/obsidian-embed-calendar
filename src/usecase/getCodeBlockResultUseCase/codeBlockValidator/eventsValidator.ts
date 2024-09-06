@@ -1,18 +1,18 @@
-import { getMessages } from "@/application/shared/utilValibot";
+import { getMessages } from "@/usecase/shared/utilValibot";
 import * as v from "valibot";
-import { ReconstructEventAS } from "./reconstructEventAS";
-import type { OptionsType } from "./validCodeBlockOptionsAS";
+import { EventReconstructor } from "./eventReconstructor";
+import type { OptionsType } from "./optionsValidator";
 
 const FileSchema = v.object({
 	path: v.string(),
 	frontmatter: v.record(v.string(), v.any()),
 });
 
-export class ValidCodeBlockEventsAS {
-	private _reconstructEventAS;
+export class EventsValidator {
+	private _eventReconstructor;
 	private _EventsSchema;
 	constructor(options: OptionsType) {
-		this._reconstructEventAS = new ReconstructEventAS(options);
+		this._eventReconstructor = new EventReconstructor(options);
 		const EventSchema = v.pipe(
 			v.object({
 				file: FileSchema,
@@ -27,7 +27,7 @@ export class ValidCodeBlockEventsAS {
 				metadata: v.optional(v.union([v.string(), v.instance(HTMLElement)])),
 			}),
 			v.transform((codeBlockEvent) => {
-				return this._reconstructEventAS.execute(codeBlockEvent);
+				return this._eventReconstructor.execute(codeBlockEvent);
 			}),
 		);
 		this._EventsSchema = v.array(EventSchema);

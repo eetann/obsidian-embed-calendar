@@ -6,7 +6,7 @@ import {
 } from "@/domain/model/event/metadata/metadata";
 import { Path } from "@/domain/model/event/path/path";
 import { Title } from "@/domain/model/event/title/title";
-import type { OptionsType } from "./validCodeBlockOptionsAS";
+import type { OptionsType } from "./optionsValidator";
 
 type CodeBlockEvent = {
 	file: {
@@ -18,7 +18,7 @@ type CodeBlockEvent = {
 	allDay: boolean;
 	metadata?: MetadataType;
 };
-export class ReconstructEventAS {
+export class EventReconstructor {
 	private _options: OptionsType;
 	constructor(options: OptionsType) {
 		this._options = options;
