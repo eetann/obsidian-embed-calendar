@@ -1,4 +1,4 @@
-import { MockDataviewApi } from "@/application/shared/MockDataviewApi";
+import { MockDataviewApi } from "@/usecase/shared/MockDataviewApi";
 import { LoadCodeBlockAS } from "./loadCodeBlockAS";
 
 describe("LoadCodeBlockAS", () => {
