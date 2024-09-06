@@ -1,5 +1,6 @@
 import type { OptionsType } from "src/calendar/schema/options";
 
+// TODO:
 /* ref: src/calendar/overwrite.css */
 
 function setProperty(calendarId: string, name: string, value: string) {

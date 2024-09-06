@@ -1,6 +1,6 @@
-import { useEffect, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { Event as RbcEvent } from "react-big-calendar";
-import { useDnDContext } from "./context";
+import { useDnDContext } from "../provider/DnDContextProvider";
 
 type EventWrapperProps = {
 	event: RbcEvent;
