@@ -1,5 +1,5 @@
 import { type App, Plugin, PluginSettingTab, Setting } from "obsidian";
-import { ReactMarkdownRenderChild } from "./App";
+import { ReactMarkdownRenderChild } from "./presentation/calendar/App";
 
 interface EmbedCalendarSettings {
 	mySetting: string;
