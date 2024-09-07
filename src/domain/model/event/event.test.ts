@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { DateTime } from "./dateTime/dateTime";
 import { Event } from "./event";
 import { Metadata } from "./metadata/metadata";
@@ -8,57 +9,32 @@ describe("Event", () => {
 	const path = new Path("inbox/example.md");
 	const title = new Title("Birthday");
 	const format = "YYYY-MM-DD";
-	const dateTime0901 = new DateTime({ date: "2024-09-01", format });
-	const dateTime0902 = new DateTime({ date: "2024-09-02", format });
-	const dateTime0903 = new DateTime({ date: "2024-09-03", format });
-	const allDay = true;
+	const dateTime = new DateTime({
+		start: "2024-09-01",
+		end: "2024-09-01",
+		allDay: true,
+		format,
+	});
 	const metadata = new Metadata(undefined);
 	it("reconstruct", () => {
-		const event = Event.reconstruct(
-			path,
-			title,
-			dateTime0901,
-			dateTime0901,
-			allDay,
-			metadata,
-		);
+		const event = Event.reconstruct(path, title, dateTime, metadata);
 
 		expect(event.path.equals(path)).toBeTruthy();
 		expect(event.title.equals(title)).toBeTruthy();
-		expect(event.startDateTime.equals(dateTime0901)).toBeTruthy();
-		expect(event.endDateTime.equals(dateTime0901)).toBeTruthy();
-		expect(event.allDay).toBeTruthy();
+		expect(event.dateTime.equals(dateTime)).toBeTruthy();
 		expect(event.metadata.equals(metadata)).toBeTruthy();
 	});
-	it("Error if date range is wrong", () => {
-		expect(() =>
-			Event.reconstruct(
-				path,
-				title,
-				dateTime0902,
-				dateTime0901,
-				allDay,
-				metadata,
-			),
-		).toThrow("startDateTime should be past endDateTime");
-	});
 	describe("changeDateTime", () => {
-		const event = Event.reconstruct(
-			path,
-			title,
-			dateTime0901,
-			dateTime0902,
-			allDay,
-			metadata,
-		);
+		const event = Event.reconstruct(path, title, dateTime, metadata);
 		it("Expect correct conversion results for valid formats", () => {
-			event.changeDateTime(dateTime0902, dateTime0903);
-			expect(event.startDateTime).toEqual(dateTime0902);
-			expect(event.endDateTime).toEqual(dateTime0903);
+			event.changeDateTime("2024-09-02", "2024-09-03");
+			expect(event.dateTime.start).toEqual(dayjs("2024-09-02", format));
+			expect(event.dateTime.end).toEqual(dayjs("2024-09-03", format));
 		});
+		// TODO: ここから
 		it("Error if date range is wrong", () => {
-			expect(() => event.changeDateTime(dateTime0903, dateTime0901)).toThrow(
-				"startDateTime should be past endDateTime",
+			expect(() => event.changeDateTime("2024-09-02", "2024-09-01")).toThrow(
+				"start should be past end",
 			);
 		});
 	});

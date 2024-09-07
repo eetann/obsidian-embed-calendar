@@ -4,18 +4,40 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
 type DateTimeType = {
-	date: string;
+	start: string;
+	end: string;
+	allDay: boolean;
 	format: string;
 };
 
 export class DateTime extends ValueObject<DateTimeType, "DateTime"> {
 	validate(value: DateTimeType): void {
-		if (!dayjs(value.date).isValid()) {
-			throw new Error("DateTime is not valid");
+		const start = dayjs(value.start, value.format);
+		const end = dayjs(value.end, value.format);
+		if (!start.isValid()) {
+			throw new Error("start is not valid");
+		}
+		if (!end.isValid()) {
+			throw new Error("end is not valid");
+		}
+		if (start.isAfter(end)) {
+			throw new Error("start should be past end");
 		}
 	}
 
-	get dateTime() {
-		return dayjs(this.value.date, this.value.format);
+	get start() {
+		return dayjs(this.value.start, this.value.format);
+	}
+
+	get end() {
+		return dayjs(this.value.end, this.value.format);
+	}
+
+	get allDay() {
+		return this.value.allDay;
+	}
+
+	get format() {
+		return this.value.format;
 	}
 }
