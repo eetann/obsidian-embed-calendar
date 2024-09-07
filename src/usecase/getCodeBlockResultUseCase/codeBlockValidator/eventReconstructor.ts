@@ -32,9 +32,12 @@ export class EventReconstructor {
 		return Event.reconstruct(
 			new Path(event.file.path),
 			new Title(event.title),
-			new DateTime({ date: start, format: this._options.dateFormat }),
-			new DateTime({ date: end, format: this._options.dateFormat }),
-			event.allDay,
+			new DateTime({
+				start,
+				end,
+				allDay: event.allDay,
+				format: this._options.dateFormat,
+			}),
 			new Metadata(event.metadata),
 		);
 	}

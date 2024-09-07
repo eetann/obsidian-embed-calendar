@@ -32,7 +32,7 @@ describe("EventReconstructor", () => {
 
 	it("If there is no endKey, it is the same as startKey.", () => {
 		const event = eventReconstructor.execute(codeBlockEvent);
-		expect(event.endDateTime).toEqual(event.startDateTime);
+		expect(event.dateTime.end).toEqual(event.dateTime.start);
 	});
 
 	it("If endKey is specified, the date will be the date specified by endKey, not startKey", () => {
@@ -52,6 +52,6 @@ describe("EventReconstructor", () => {
 			metadata: undefined,
 		};
 		const event = eventReconstructor.execute(codeBlockEvent);
-		expect(event.endDateTime).not.toEqual(event.startDateTime);
+		expect(event.dateTime.end).not.toEqual(event.dateTime.start);
 	});
 });
