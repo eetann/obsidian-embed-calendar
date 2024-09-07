@@ -19,8 +19,8 @@ describe("Event", () => {
 	it("reconstruct", () => {
 		const event = Event.reconstruct(path, title, dateTime, metadata);
 
-		expect(event.path.equals(path)).toBeTruthy();
-		expect(event.title.equals(title)).toBeTruthy();
+		expect(event.path).toBe("inbox/example.md");
+		expect(event.title).toBe("Birthday");
 		expect(event.dateTime.equals(dateTime)).toBeTruthy();
 		expect(event.metadata.equals(metadata)).toBeTruthy();
 	});

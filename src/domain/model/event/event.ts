@@ -31,11 +31,11 @@ export class Event {
 	}
 
 	get path() {
-		return this._path;
+		return this._path.value;
 	}
 
 	get title() {
-		return this._title;
+		return this._title.value;
 	}
 
 	get dateTime() {

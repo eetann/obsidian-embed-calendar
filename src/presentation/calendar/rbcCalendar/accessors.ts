@@ -1,7 +1,7 @@
 import type { Event } from "@/domain/model/event/event";
 
 export function titleAccessor(event: Event) {
-	return event.title.value;
+	return event.title;
 }
 
 export function startAccessor(event: Event) {

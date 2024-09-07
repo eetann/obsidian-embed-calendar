@@ -1,9 +1,9 @@
+import type { Event } from "@/domain/model/event/event";
 import type { ReactNode } from "react";
-import type { Event as RbcEvent } from "react-big-calendar";
 import { useDnDContext } from "../provider/DnDContextProvider";
 
 type EventWrapperProps = {
-	event: RbcEvent;
+	event: Event;
 	children?: ReactNode;
 };
 
@@ -17,8 +17,8 @@ export default function EventWrapper({ event, children }: EventWrapperProps) {
 				className={
 					isDrag ? "text-white no-underline" : "internal-link  no-underline"
 				}
-				data-href={event.resource.link}
-				href={event.resource.link}
+				data-href={event.path}
+				href={event.path}
 			>
 				{children}
 			</a>
