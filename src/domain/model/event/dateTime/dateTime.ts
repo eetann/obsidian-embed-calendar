@@ -26,11 +26,11 @@ export class DateTime extends ValueObject<DateTimeType, "DateTime"> {
 	}
 
 	get start() {
-		return dayjs(this.value.start, this.value.format);
+		return dayjs(this.value.start, this.value.format).toDate();
 	}
 
 	get end() {
-		return dayjs(this.value.end, this.value.format);
+		return dayjs(this.value.end, this.value.format).toDate();
 	}
 
 	get allDay() {

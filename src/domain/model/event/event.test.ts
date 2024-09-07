@@ -28,8 +28,10 @@ describe("Event", () => {
 		const event = Event.reconstruct(path, title, dateTime, metadata);
 		it("Expect correct conversion results for valid formats", () => {
 			event.changeDateTime("2024-09-02", "2024-09-03");
-			expect(event.dateTime.start).toEqual(dayjs("2024-09-02", format));
-			expect(event.dateTime.end).toEqual(dayjs("2024-09-03", format));
+			expect(event.dateTime.start).toEqual(
+				dayjs("2024-09-02", format).toDate(),
+			);
+			expect(event.dateTime.end).toEqual(dayjs("2024-09-03", format).toDate());
 		});
 		// TODO: ここから
 		it("Error if date range is wrong", () => {

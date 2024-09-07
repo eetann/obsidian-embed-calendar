@@ -1,5 +1,5 @@
-import type { OptionsType } from "@/usecase/getCodeBlockResultUseCase/codeBlockValidator/optionsValidator";
 import type { Event } from "@/domain/model/event/event";
+import type { OptionsType } from "@/usecase/getCodeBlockResultUseCase/codeBlockValidator/optionsValidator";
 import dayjs from "dayjs";
 import { useEffect, useMemo } from "react";
 import { Calendar, dayjsLocalizer } from "react-big-calendar";
@@ -8,6 +8,12 @@ import withDragAndDrop, {
 } from "react-big-calendar/lib/addons/dragAndDrop";
 import { useDnDContext } from "../provider/DnDContextProvider";
 import EventWrapper from "./EventWrapper";
+import {
+	allDayAccessor,
+	endAccessor,
+	startAccessor,
+	titleAccessor,
+} from "./accessors";
 import { applyRowTypeStyle } from "./applyRowTypeStyle";
 import { cultures } from "./localization";
 
@@ -64,6 +70,10 @@ export default function RbcCalendar({ events, options }: Props) {
 			culture={lang}
 			defaultDate={defaultDate}
 			events={events}
+			titleAccessor={titleAccessor}
+			startAccessor={startAccessor}
+			endAccessor={endAccessor}
+			allDayAccessor={allDayAccessor}
 			components={components}
 			defaultView={options.defaultView}
 			// TODO: work_weekも自由に入れられるようにオプション化
