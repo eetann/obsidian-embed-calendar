@@ -17,7 +17,7 @@ import {
 import { applyRowTypeStyle } from "./applyRowTypeStyle";
 import { cultures } from "./localization";
 
-const DnDCalendar = withDragAndDrop(Calendar);
+const DnDCalendar = withDragAndDrop<Event>(Calendar);
 const localizer = dayjsLocalizer(dayjs);
 
 type Props = {
