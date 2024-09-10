@@ -1,9 +1,9 @@
-import type { Event } from "@/domain/model/event/event";
 import type { ReactNode } from "react";
 import { useDnDContext } from "../provider/DnDContextProvider";
+import type { EventDTO } from "@/usecase/event/eventDTO";
 
 type EventWrapperProps = {
-	event: Event;
+	event: EventDTO;
 	children?: ReactNode;
 };
 

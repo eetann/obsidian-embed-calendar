@@ -1,4 +1,4 @@
-import type { Event } from "@/domain/model/event/event";
+import type { EventDTO } from "@/usecase/event/eventDTO";
 import type { OptionsType } from "@/usecase/getCodeBlockResultUseCase/codeBlockValidator/optionsValidator";
 import dayjs from "dayjs";
 import { useEffect, useMemo } from "react";
@@ -8,20 +8,14 @@ import withDragAndDrop, {
 } from "react-big-calendar/lib/addons/dragAndDrop";
 import { useDnDContext } from "../provider/DnDContextProvider";
 import EventWrapper from "./EventWrapper";
-import {
-	allDayAccessor,
-	endAccessor,
-	startAccessor,
-	titleAccessor,
-} from "./accessors";
 import { applyRowTypeStyle } from "./applyRowTypeStyle";
 import { cultures } from "./localization";
 
-const DnDCalendar = withDragAndDrop<Event>(Calendar);
+const DnDCalendar = withDragAndDrop<EventDTO>(Calendar);
 const localizer = dayjsLocalizer(dayjs);
 
 type Props = {
-	events: Event[];
+	events: EventDTO[];
 	options: OptionsType;
 };
 
@@ -48,21 +42,22 @@ export default function RbcCalendar({ events, options }: Props) {
 		applyRowTypeStyle(calendarId, options.eventRowType);
 	}, [options, calendarId]);
 
-	const onEventDrop: withDragAndDropProps["onEventDrop"] = ({
+	const onEventDrop: withDragAndDropProps<EventDTO>["onEventDrop"] = ({
 		event,
 		start,
 		end,
 	}) => {
+		console.log("onEventDrop");
+		// event.changeDateTime(start.toString(), end.toString());
+		console.log(event);
 		// TODO: スタートの書き換え
 		// TODO: frontmatterを書き換えるには file が必要かも
-		// event.start
 		// TODO: endの書き換え
 		setIsDrag(false);
 	};
 
 	return (
 		<DnDCalendar
-			draggableAccessor={(event) => true}
 			localizer={localizer}
 			// TODO: formatsは上書きできるようにする
 			formats={lang ? cultures[lang]?.formats : undefined}
@@ -70,10 +65,11 @@ export default function RbcCalendar({ events, options }: Props) {
 			culture={lang}
 			defaultDate={defaultDate}
 			events={events}
-			titleAccessor={titleAccessor}
-			startAccessor={startAccessor}
-			endAccessor={endAccessor}
-			allDayAccessor={allDayAccessor}
+			// https://github.com/jquense/react-big-calendar/blob/master/src/addons/dragAndDrop/EventContainerWrapper.js#L55-L60
+			// titleAccessor={titleAccessor}
+			// startAccessor={startAccessor}
+			// endAccessor={endAccessor}
+			// allDayAccessor={allDayAccessor}
 			components={components}
 			defaultView={options.defaultView}
 			// TODO: work_weekも自由に入れられるようにオプション化
@@ -94,8 +90,18 @@ export default function RbcCalendar({ events, options }: Props) {
 				}
 				return { className: fontSize };
 			}}
-			onDragStart={() => setIsDrag(true)}
+			onDragStart={() => {
+				console.log("onDragStart");
+				setIsDrag(true);
+			}}
+			onDragOver={() => {
+				console.log("onDragOver");
+				setIsDrag(false);
+			}}
 			onEventDrop={onEventDrop}
+			onEventResize={() => {
+				console.log("onEventResize");
+			}}
 		/>
 	);
 }

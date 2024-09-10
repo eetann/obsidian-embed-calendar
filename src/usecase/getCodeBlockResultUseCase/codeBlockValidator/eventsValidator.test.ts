@@ -1,4 +1,4 @@
-import { Event } from "@/domain/model/event/event";
+import { EventDTO } from "@/usecase/event/eventDTO";
 import { EventsValidator } from "./eventsValidator";
 
 describe("EventsValidator", () => {
@@ -23,10 +23,12 @@ describe("EventsValidator", () => {
 			},
 		]);
 		expect(events).toBeTypeOf("object");
-		expect(events[0]).toBeInstanceOf(Event);
+		expect(events[0]).toBeInstanceOf(EventDTO);
 	});
 
 	it("should throw an error when given invalid input data", () => {
-		expect(() => new EventsValidator(options).execute({})).toThrowError();
+		expect(() => new EventsValidator(options).execute({})).toThrow(
+			"Failed to parse events\nevents should be an array.",
+		);
 	});
 });

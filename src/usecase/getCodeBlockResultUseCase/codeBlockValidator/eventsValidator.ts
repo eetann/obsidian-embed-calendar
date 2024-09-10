@@ -1,3 +1,4 @@
+import { EventDTO } from "@/usecase/event/eventDTO";
 import { getMessages } from "@/usecase/shared/utilValibot";
 import * as v from "valibot";
 import { EventReconstructor } from "./eventReconstructor";
@@ -10,10 +11,10 @@ const FileSchema = v.object({
 
 export class EventsValidator {
 	private _eventReconstructor;
-	private _EventsSchema;
+	private _EventSchema;
 	constructor(options: OptionsType) {
 		this._eventReconstructor = new EventReconstructor(options);
-		const EventSchema = v.pipe(
+		this._EventSchema = v.pipe(
 			v.object({
 				file: FileSchema,
 				title: v.pipe(
@@ -30,14 +31,25 @@ export class EventsValidator {
 				return this._eventReconstructor.execute(codeBlockEvent);
 			}),
 		);
-		this._EventsSchema = v.array(EventSchema);
 	}
 
 	execute(data: unknown) {
-		const result = v.safeParse(this._EventsSchema, data);
-		if (result.success) {
-			return result.output;
+		const _result = v.safeParse(v.array(v.unknown()), data);
+		if (!_result.success) {
+			throw new Error("Failed to parse events\nevents should be an array.");
 		}
-		throw new Error(`Failed to parse events\n${getMessages(result.issues)}`);
+		const events: EventDTO[] = [];
+		for (const event of _result.output) {
+			const result = v.safeParse(this._EventSchema, event);
+			if (!result.success) {
+				// TODO: エラーのあったeventは別途表示
+				throw new Error(
+					`Failed to parse events\n${getMessages(result.issues)}`,
+				);
+			}
+			events.push(new EventDTO(result.output));
+		}
+		console.log(events);
+		return events;
 	}
 }

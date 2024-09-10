@@ -31,15 +31,27 @@ export class Event {
 	}
 
 	get path() {
-		return this._path.value;
+		return this._path;
 	}
 
 	get title() {
-		return this._title.value;
+		return this._title;
 	}
 
 	get dateTime() {
 		return this._dateTime;
+	}
+
+	get start() {
+		return this._dateTime.start;
+	}
+
+	get end() {
+		return this._dateTime.end;
+	}
+
+	get allDay() {
+		return this._dateTime.allDay;
 	}
 
 	get metadata() {
