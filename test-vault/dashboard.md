@@ -28,8 +28,7 @@
     })),
 	options: {
 		dateFormat: "YYYY-MM-DD",
-    startKey: "startDateTime",
-    endKey: "endDateTime",
+    startKey: "startDate",
 		calendarHeight: 700,
 		eventFontSize: "lg",
 		eventRowType: {type: "manual"},
