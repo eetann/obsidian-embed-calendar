@@ -49,7 +49,6 @@ export class EventsValidator {
 			}
 			events.push(new EventDTO(result.output));
 		}
-		console.log(events);
 		return events;
 	}
 }
