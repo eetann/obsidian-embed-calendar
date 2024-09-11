@@ -65,11 +65,6 @@ export default function RbcCalendar({ events, options }: Props) {
 			culture={lang}
 			defaultDate={defaultDate}
 			events={events}
-			// https://github.com/jquense/react-big-calendar/blob/master/src/addons/dragAndDrop/EventContainerWrapper.js#L55-L60
-			// titleAccessor={titleAccessor}
-			// startAccessor={startAccessor}
-			// endAccessor={endAccessor}
-			// allDayAccessor={allDayAccessor}
 			components={components}
 			defaultView={options.defaultView}
 			// TODO: work_weekも自由に入れられるようにオプション化
