@@ -1,10 +1,8 @@
 import "./app.css";
-import { GetCodeBlockResultUseCase } from "@/usecase/getCodeBlockResultUseCase/getCodeBlockResultUseCase";
 import { MarkdownRenderChild } from "obsidian";
 import { StrictMode } from "react";
 import { type Root, createRoot } from "react-dom/client";
-import CalendarWrapper from "./CalendarWrapper";
-import RbcCalendar from "./rbcCalendar/RbcCalendar";
+import Calendar from "./Calendar";
 
 // ref: https://github.com/waynevanson/data-entry-obsidian-plugin
 export class ReactMarkdownRenderChild extends MarkdownRenderChild {
@@ -18,29 +16,13 @@ export class ReactMarkdownRenderChild extends MarkdownRenderChild {
 	}
 
 	async onload() {
-		try {
-			const { options, events } = await new GetCodeBlockResultUseCase().execute(
-				this.source,
-			);
-			this.root.render(
-				<StrictMode>
-					<div className="ob-embed-calendar">
-						<CalendarWrapper options={options}>
-							<RbcCalendar events={events} options={options} />
-						</CalendarWrapper>
-					</div>
-				</StrictMode>,
-			);
-		} catch (e) {
-			console.log(e);
-			this.root.render(
-				<StrictMode>
-					<div className="ob-embed-calendar">
-						<pre>{String(e)}</pre>
-					</div>
-				</StrictMode>,
-			);
-		}
+		this.root.render(
+			<StrictMode>
+				<div className="ob-embed-calendar">
+					<Calendar source={this.source} />
+				</div>
+			</StrictMode>,
+		);
 	}
 
 	async unload() {
