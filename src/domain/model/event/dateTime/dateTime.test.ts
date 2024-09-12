@@ -12,8 +12,8 @@ describe("DateTime", () => {
 			allDay: true,
 			format,
 		});
-		expect(dateTime.start).toEqual(dayjs(date0901, format).toDate());
-		expect(dateTime.end).toEqual(dayjs(date0902, format).toDate());
+		expect(dateTime.startDate).toEqual(dayjs(date0901, format).toDate());
+		expect(dateTime.endDate).toEqual(dayjs(date0902, format).toDate());
 		expect(dateTime.allDay).toBe(true);
 		expect(dateTime.format).toBe(format);
 	});
@@ -24,8 +24,8 @@ describe("DateTime", () => {
 			allDay: true,
 			format,
 		});
-		expect(dateTime.start).toEqual(dayjs(date0901, format).toDate());
-		expect(dateTime.end).toEqual(dayjs(date0901, format).toDate());
+		expect(dateTime.startDate).toEqual(dayjs(date0901, format).toDate());
+		expect(dateTime.endDate).toEqual(dayjs(date0901, format).toDate());
 	});
 
 	it("Error if start is not valid", () => {

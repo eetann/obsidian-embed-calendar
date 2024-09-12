@@ -43,11 +43,11 @@ export class Event {
 	}
 
 	get start() {
-		return this._dateTime.start;
+		return this._dateTime.startDate;
 	}
 
 	get end() {
-		return this._dateTime.end;
+		return this._dateTime.endDate;
 	}
 
 	get allDay() {

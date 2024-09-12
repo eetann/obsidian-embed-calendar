@@ -25,12 +25,20 @@ export class DateTime extends ValueObject<DateTimeType, "DateTime"> {
 		}
 	}
 
-	get start() {
+	get startDate() {
 		return dayjs(this.value.start, this.value.format).toDate();
 	}
 
-	get end() {
+	get endDate() {
 		return dayjs(this.value.end, this.value.format).toDate();
+	}
+
+	get startString() {
+		return this.value.start;
+	}
+
+	get endString() {
+		return this.value.end;
 	}
 
 	get allDay() {
