@@ -1,3 +1,4 @@
+import { DefaultDateSchema } from "@/usecase/shared/defaultDateSchema";
 import { getMessages } from "@/usecase/shared/utilValibot";
 import * as v from "valibot";
 
@@ -5,19 +6,6 @@ const NonEmptySchema = v.pipe(
 	v.string(),
 	v.nonEmpty("Write at least one character"),
 );
-
-const DefaultDateSchema = v.variant("type", [
-	v.object({ type: v.literal("today") }),
-	v.object({
-		type: v.literal("fixed"),
-		date: v.pipe(v.string(), v.nonEmpty()),
-	}),
-	// TODO: Implemented at src/calendar/Calendar.tsx
-	v.object({
-		type: v.literal("frontmatter"),
-		key: v.pipe(v.string(), v.nonEmpty()),
-	}),
-]);
 
 const EventRowTypeSchema = v.variant(
 	"type",
