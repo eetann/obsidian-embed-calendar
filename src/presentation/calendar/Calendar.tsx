@@ -2,6 +2,7 @@ import "./overwrite.css";
 import type { EventDTO } from "@/usecase/event/eventDTO";
 import { GetDefaultDateUseCase } from "@/usecase/options/getDefaultDateUseCase";
 import dayjs from "dayjs";
+import type { Plugin } from "obsidian";
 import { useEffect, useMemo } from "react";
 import { Calendar as RbcCalendar, dayjsLocalizer } from "react-big-calendar";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
@@ -19,10 +20,11 @@ const DnDCalendar = withDragAndDrop<EventDTO>(RbcCalendar);
 const localizer = dayjsLocalizer(dayjs);
 
 type Props = {
+	plugin: Plugin;
 	source: string;
 };
 
-export default function Calendar({ source }: Props) {
+export default function Calendar({ plugin, source }: Props) {
 	// To set CSS variables for each Calendar
 	const calendarId = crypto.randomUUID();
 	const { options, events, setEvents, error } = useCodeBlock(source);

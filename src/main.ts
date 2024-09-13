@@ -20,7 +20,7 @@ export default class EmbedCalendar extends Plugin {
 			this._language,
 			async (source, element, context) => {
 				const container = element.createEl("div");
-				const renderer = new ReactMarkdownRenderChild(container, source);
+				const renderer = new ReactMarkdownRenderChild(this, container, source);
 				context.addChild(renderer);
 			},
 		);

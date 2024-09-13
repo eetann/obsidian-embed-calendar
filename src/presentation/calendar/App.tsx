@@ -1,16 +1,18 @@
 import "./app.css";
-import { MarkdownRenderChild } from "obsidian";
+import { MarkdownRenderChild, type Plugin } from "obsidian";
 import { StrictMode } from "react";
 import { type Root, createRoot } from "react-dom/client";
 import Calendar from "./Calendar";
 
 // ref: https://github.com/waynevanson/data-entry-obsidian-plugin
 export class ReactMarkdownRenderChild extends MarkdownRenderChild {
+	plugin: Plugin;
 	root: Root;
 	source: string;
 
-	constructor(containerEl: HTMLElement, source: string) {
+	constructor(plugin: Plugin, containerEl: HTMLElement, source: string) {
 		super(containerEl);
+		this.plugin = plugin;
 		this.root = createRoot(containerEl);
 		this.source = source;
 	}
@@ -19,7 +21,7 @@ export class ReactMarkdownRenderChild extends MarkdownRenderChild {
 		this.root.render(
 			<StrictMode>
 				<div className="ob-embed-calendar">
-					<Calendar source={this.source} />
+					<Calendar plugin={this.plugin} source={this.source} />
 				</div>
 			</StrictMode>,
 		);
