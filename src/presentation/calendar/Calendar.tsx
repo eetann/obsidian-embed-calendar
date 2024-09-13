@@ -12,7 +12,7 @@ import {
 } from "./provider/DnDContextProvider";
 import EventWrapper from "./rbcCalendar/EventWrapper";
 import { applyRowTypeStyle } from "./rbcCalendar/applyRowTypeStyle";
-import { onEventDrop } from "./rbcCalendar/handler";
+import { OnEventDrop } from "./rbcCalendar/handler";
 import { cultures } from "./rbcCalendar/localization";
 import { useCodeBlock } from "./useCodeBlock";
 
@@ -52,6 +52,7 @@ export default function Calendar({ plugin, source }: Props) {
 
 	const lang = options.language;
 	const defaultDate = new GetDefaultDateUseCase().execute(options.defaultDate);
+	const onEventDrop = new OnEventDrop(plugin, options);
 
 	return (
 		<div
@@ -98,10 +99,7 @@ export default function Calendar({ plugin, source }: Props) {
 						console.log("onDragOver");
 						setIsDrag(false);
 					}}
-					onEventDrop={(event) => {
-						onEventDrop(event);
-						setIsDrag(false);
-					}}
+					onEventDrop={(args) => onEventDrop.execute(args)}
 					onEventResize={() => {
 						console.log("onEventResize");
 					}}
