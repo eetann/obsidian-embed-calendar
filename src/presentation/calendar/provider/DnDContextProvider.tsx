@@ -1,8 +1,15 @@
-import { type ReactNode, createContext, useContext, useState } from "react";
+import {
+	type Dispatch,
+	type ReactNode,
+	type SetStateAction,
+	createContext,
+	useContext,
+	useState,
+} from "react";
 
 type DnDContextType = {
 	isDrag: boolean;
-	setIsDrag: (value: boolean) => void;
+	setIsDrag: Dispatch<SetStateAction<boolean>>;
 };
 
 const DnDContext = createContext<DnDContextType>({} as DnDContextType);

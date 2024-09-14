@@ -52,7 +52,7 @@ export default function Calendar({ plugin, source }: Props) {
 
 	const lang = options.language;
 	const defaultDate = new GetDefaultDateUseCase().execute(options.defaultDate);
-	const onEventDrop = new OnEventDrop(plugin, options);
+	const onEventDrop = new OnEventDrop(plugin, options, setEvents);
 
 	return (
 		<div

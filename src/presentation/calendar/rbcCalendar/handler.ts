@@ -3,15 +3,22 @@ import { ChangeDateTimeUseCase } from "@/usecase/event/changeDateTimeUseCase";
 import type { EventDTO } from "@/usecase/event/eventDTO";
 import type { OptionsType } from "@/usecase/getCodeBlockResultUseCase/codeBlockValidator/optionsValidator";
 import type { Plugin } from "obsidian";
+import type { Dispatch, SetStateAction } from "react";
 import type { EventInteractionArgs } from "react-big-calendar/lib/addons/dragAndDrop";
 
 export class OnEventDrop {
 	options: OptionsType;
 	changeDateTime: ChangeDateTimeUseCase;
-	constructor(plugin: Plugin, options: OptionsType) {
+	setEvents: Dispatch<SetStateAction<EventDTO[] | null>>;
+	constructor(
+		plugin: Plugin,
+		options: OptionsType,
+		setEvents: Dispatch<SetStateAction<EventDTO[] | null>>,
+	) {
 		this.options = options;
 		const fileRepository = new FileRepository(plugin);
 		this.changeDateTime = new ChangeDateTimeUseCase(fileRepository);
+		this.setEvents = setEvents;
 	}
 
 	async execute({ event, start, end }: EventInteractionArgs<EventDTO>) {
@@ -22,7 +29,15 @@ export class OnEventDrop {
 			end,
 			options: this.options,
 		});
-		// TODO: ここでeventsの書き換え
-		console.log({ eventDTO });
+		this.setEvents((events) =>
+			events
+				? events.map((e) => {
+						if (e.path === event.path) {
+							return eventDTO;
+						}
+						return e;
+					})
+				: null,
+		);
 	}
 }
