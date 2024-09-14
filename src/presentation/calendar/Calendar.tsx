@@ -4,10 +4,16 @@ import { GetDefaultDateUseCase } from "@/usecase/options/getDefaultDateUseCase";
 import dayjs from "dayjs";
 import type { Plugin } from "obsidian";
 import { useEffect, useMemo } from "react";
-import { Calendar as RbcCalendar, dayjsLocalizer } from "react-big-calendar";
+import {
+	type Components,
+	Calendar as RbcCalendar,
+	dayjsLocalizer,
+} from "react-big-calendar";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { useDnDContext } from "./provider/DnDContextProvider";
-import EventWrapper from "./rbcCalendar/EventWrapper";
+import EventWrapper, {
+	type EventWrapperProps,
+} from "./rbcCalendar/EventWrapper";
 import { applyRowTypeStyle } from "./rbcCalendar/applyRowTypeStyle";
 import { OnEventDrop } from "./rbcCalendar/handler";
 import { cultures } from "./rbcCalendar/localization";
@@ -26,9 +32,11 @@ export default function Calendar({ plugin, source }: Props) {
 	const calendarId = crypto.randomUUID();
 	const { options, events, setEvents, error } = useCodeBlock(source);
 	const { setIsDrag } = useDnDContext();
-	const components = useMemo(
+	const components: Components<EventDTO> = useMemo(
 		() => ({
-			eventWrapper: EventWrapper,
+			eventWrapper: (props: EventWrapperProps) => (
+				<EventWrapper {...props}>{props.children}</EventWrapper>
+			),
 		}),
 		[],
 	);
@@ -88,12 +96,19 @@ export default function Calendar({ plugin, source }: Props) {
 					return { className: fontSize };
 				}}
 				onDragStart={() => {
+					console.log("onDragStart");
 					setIsDrag(true);
+					// onDragOverが呼ばれなければsetIsDragをオフにする
 				}}
 				onDragOver={() => {
+					console.log("onDragOver");
 					setIsDrag(false);
 				}}
-				onEventDrop={(args) => onEventDrop.execute(args)}
+				onEventDrop={(args) => {
+					console.log("onEventDrop");
+					onEventDrop.execute(args);
+					setIsDrag(false);
+				}}
 				onEventResize={() => {
 					console.log("onEventResize");
 				}}
