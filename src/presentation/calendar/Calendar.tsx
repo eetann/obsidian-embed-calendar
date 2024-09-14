@@ -6,10 +6,7 @@ import type { Plugin } from "obsidian";
 import { useEffect, useMemo } from "react";
 import { Calendar as RbcCalendar, dayjsLocalizer } from "react-big-calendar";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
-import {
-	DnDContextProvider,
-	useDnDContext,
-} from "./provider/DnDContextProvider";
+import { useDnDContext } from "./provider/DnDContextProvider";
 import EventWrapper from "./rbcCalendar/EventWrapper";
 import { applyRowTypeStyle } from "./rbcCalendar/applyRowTypeStyle";
 import { OnEventDrop } from "./rbcCalendar/handler";
@@ -62,49 +59,45 @@ export default function Calendar({ plugin, source }: Props) {
 				height: `${options.calendarHeight}px`,
 			}}
 		>
-			<DnDContextProvider>
-				<DnDCalendar
-					localizer={localizer}
-					// TODO: formatsは上書きできるようにする
-					formats={lang ? cultures[lang]?.formats : undefined}
-					messages={lang ? cultures[lang]?.messages : undefined}
-					culture={lang}
-					defaultDate={defaultDate}
-					events={events}
-					components={components}
-					defaultView={options.defaultView}
-					// TODO: work_weekも自由に入れられるようにオプション化
-					views={["month", "week", "day", "agenda"]}
-					// views={["month", "week", "work_week", "day", "agenda"]}
-					eventPropGetter={() => {
-						let fontSize = "text-xs";
-						switch (options.eventFontSize) {
-							case "sm":
-								fontSize = "text-sm";
-								break;
-							case "base":
-								fontSize = "text-base";
-								break;
-							case "lg":
-								fontSize = "text-lg";
-								break;
-						}
-						return { className: fontSize };
-					}}
-					onDragStart={() => {
-						console.log("onDragStart");
-						setIsDrag(true);
-					}}
-					onDragOver={() => {
-						console.log("onDragOver");
-						setIsDrag(false);
-					}}
-					onEventDrop={(args) => onEventDrop.execute(args)}
-					onEventResize={() => {
-						console.log("onEventResize");
-					}}
-				/>
-			</DnDContextProvider>
+			<DnDCalendar
+				localizer={localizer}
+				// TODO: formatsは上書きできるようにする
+				formats={lang ? cultures[lang]?.formats : undefined}
+				messages={lang ? cultures[lang]?.messages : undefined}
+				culture={lang}
+				defaultDate={defaultDate}
+				events={events}
+				components={components}
+				defaultView={options.defaultView}
+				// TODO: work_weekも自由に入れられるようにオプション化
+				views={["month", "week", "day", "agenda"]}
+				// views={["month", "week", "work_week", "day", "agenda"]}
+				eventPropGetter={() => {
+					let fontSize = "text-xs";
+					switch (options.eventFontSize) {
+						case "sm":
+							fontSize = "text-sm";
+							break;
+						case "base":
+							fontSize = "text-base";
+							break;
+						case "lg":
+							fontSize = "text-lg";
+							break;
+					}
+					return { className: fontSize };
+				}}
+				onDragStart={() => {
+					setIsDrag(true);
+				}}
+				onDragOver={() => {
+					setIsDrag(false);
+				}}
+				onEventDrop={(args) => onEventDrop.execute(args)}
+				onEventResize={() => {
+					console.log("onEventResize");
+				}}
+			/>
 		</div>
 	);
 }
