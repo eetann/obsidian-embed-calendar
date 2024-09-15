@@ -1,6 +1,14 @@
 import type { EventDTO } from "@/usecase/event/eventDTO";
 import type { EventProps } from "react-big-calendar";
+import { tv } from "tailwind-variants";
 import { useDnDContext } from "../provider/DnDContextProvider";
+
+const style = tv({
+	base: "text-white no-underline block hover:text-white hover:no-underline",
+	variants: {
+		isDrag: { false: "internal-link" },
+	},
+});
 
 export default function EventContent({ event }: EventProps<EventDTO>) {
 	const { isDrag, setIsDrag } = useDnDContext();
@@ -9,11 +17,7 @@ export default function EventContent({ event }: EventProps<EventDTO>) {
 			<a
 				target="_blank"
 				rel="noreferrer noopener"
-				className={
-					isDrag
-						? "text-white no-underline"
-						: "font-extrabold internal-link  no-underline"
-				}
+				className={style({ isDrag })}
 				data-href={event.path}
 				href={event.path}
 				onMouseUp={() => {
