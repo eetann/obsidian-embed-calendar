@@ -11,9 +11,7 @@ import {
 } from "react-big-calendar";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { useDnDContext } from "./provider/DnDContextProvider";
-import EventWrapper, {
-	type EventWrapperProps,
-} from "./rbcCalendar/EventWrapper";
+import EventContent from "./rbcCalendar/EventContent";
 import { applyRowTypeStyle } from "./rbcCalendar/applyRowTypeStyle";
 import { OnEventDrop } from "./rbcCalendar/handler";
 import { cultures } from "./rbcCalendar/localization";
@@ -34,9 +32,7 @@ export default function Calendar({ plugin, source }: Props) {
 	const { setIsDrag } = useDnDContext();
 	const components: Components<EventDTO> = useMemo(
 		() => ({
-			eventWrapper: (props: EventWrapperProps) => (
-				<EventWrapper {...props}>{props.children}</EventWrapper>
-			),
+			event: EventContent,
 		}),
 		[],
 	);
@@ -98,7 +94,6 @@ export default function Calendar({ plugin, source }: Props) {
 				onDragStart={() => {
 					console.log("onDragStart");
 					setIsDrag(true);
-					// onDragOverが呼ばれなければsetIsDragをオフにする
 				}}
 				onDragOver={() => {
 					console.log("onDragOver");
@@ -111,6 +106,13 @@ export default function Calendar({ plugin, source }: Props) {
 				}}
 				onEventResize={() => {
 					console.log("onEventResize");
+				}}
+				selectable={true}
+				onSelectEvent={() => {
+					console.log("onSelectEvent");
+				}}
+				onSelectSlot={() => {
+					console.log("onSelectSlot");
 				}}
 			/>
 		</div>

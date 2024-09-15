@@ -1,13 +1,8 @@
 import type { EventDTO } from "@/usecase/event/eventDTO";
-import type { ReactNode } from "react";
-import type { EventWrapperProps as RbcEventWrapperProps } from "react-big-calendar";
+import type { EventProps } from "react-big-calendar";
 import { useDnDContext } from "../provider/DnDContextProvider";
 
-export interface EventWrapperProps extends RbcEventWrapperProps<EventDTO> {
-	children: ReactNode;
-}
-
-export default function EventWrapper({ event, children }: EventWrapperProps) {
+export default function EventContent({ event }: EventProps<EventDTO>) {
 	const { isDrag, setIsDrag } = useDnDContext();
 	return (
 		<span>
@@ -22,11 +17,14 @@ export default function EventWrapper({ event, children }: EventWrapperProps) {
 				data-href={event.path}
 				href={event.path}
 				onMouseUp={() => {
-					console.log("onMouseUp");
+					// 1. onMouseUp
+					// 2. setIsDrag(false)
+					// 3. "internal-link" makes this back to obsidian internal-link
+					// 4. href
 					setIsDrag(false);
 				}}
 			>
-				{children}
+				{event.title}
 			</a>
 		</span>
 	);
