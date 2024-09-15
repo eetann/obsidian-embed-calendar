@@ -6,7 +6,7 @@ import type { Plugin } from "obsidian";
 import type { Dispatch, SetStateAction } from "react";
 import type { EventInteractionArgs } from "react-big-calendar/lib/addons/dragAndDrop";
 
-export class OnEventDrop {
+export class UpdateEvent {
 	options: OptionsType;
 	changeDateTime: ChangeDateTimeUseCase;
 	setEvents: Dispatch<SetStateAction<EventDTO[] | null>>;
@@ -22,7 +22,6 @@ export class OnEventDrop {
 	}
 
 	async execute({ event, start, end }: EventInteractionArgs<EventDTO>) {
-		console.log("onEventDrop");
 		const eventDTO = await this.changeDateTime.execute({
 			event,
 			start,

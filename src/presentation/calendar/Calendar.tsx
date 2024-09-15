@@ -13,7 +13,7 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { useDnDContext } from "./provider/DnDContextProvider";
 import EventContent from "./rbcCalendar/EventContent";
 import { applyRowTypeStyle } from "./rbcCalendar/applyRowTypeStyle";
-import { OnEventDrop } from "./rbcCalendar/handler";
+import { UpdateEvent } from "./rbcCalendar/handler";
 import { cultures } from "./rbcCalendar/localization";
 import { useCodeBlock } from "./useCodeBlock";
 
@@ -33,6 +33,8 @@ export default function Calendar({ plugin, source }: Props) {
 	const components: Components<EventDTO> = useMemo(
 		() => ({
 			event: EventContent,
+			// TODO: weekやDayで、短い期間でも選択可能にする
+			// eventContainerWrapper: ,
 		}),
 		[],
 	);
@@ -53,7 +55,7 @@ export default function Calendar({ plugin, source }: Props) {
 
 	const lang = options.language;
 	const defaultDate = new GetDefaultDateUseCase().execute(options.defaultDate);
-	const onEventDrop = new OnEventDrop(plugin, options, setEvents);
+	const updateEvent = new UpdateEvent(plugin, options, setEvents);
 
 	return (
 		<div
@@ -91,7 +93,6 @@ export default function Calendar({ plugin, source }: Props) {
 					}
 					return { className: fontSize };
 				}}
-				// TODO: allDayのときの期間を正しく指定(accessorで sethours 12)
 				endAccessor={(event) => {
 					const end = event.end;
 					if (event.allDay && event.end.getHours() === 0) {
@@ -100,24 +101,18 @@ export default function Calendar({ plugin, source }: Props) {
 					return end;
 				}}
 				onDragStart={() => {
-					console.log("onDragStart");
 					setIsDrag(true);
 				}}
 				onDragOver={() => {
-					console.log("onDragOver");
 					setIsDrag(false);
 				}}
 				onEventDrop={(args) => {
-					console.log("onEventDrop");
-					onEventDrop.execute(args);
+					updateEvent.execute(args);
 					setIsDrag(false);
 				}}
-				onEventResize={() => {
-					console.log("onEventResize");
-				}}
-				selectable={true}
-				onSelectEvent={() => {
-					console.log("onSelectEvent");
+				onEventResize={(args) => {
+					updateEvent.execute(args);
+					setIsDrag(false);
 				}}
 				onSelectSlot={() => {
 					console.log("onSelectSlot");
