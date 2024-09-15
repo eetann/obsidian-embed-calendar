@@ -47,6 +47,7 @@ npm run watch
 - [x] エラー表示
 - [x] titleの改行を有効化
 - [ ] D&Dによる日時変更
+- [ ] allDayの期間の終わりを正しく表示
 - [ ] 新しいノートの作成
 - [ ] テストの追加
   - [ ] 参考: https://github.com/ycnmhd/obsidian-lineage

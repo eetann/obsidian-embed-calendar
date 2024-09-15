@@ -26,8 +26,12 @@ export class EventReconstructor {
 	execute(event: CodeBlockEvent): Event {
 		const start = String(event.file.frontmatter[this._options.startKey]);
 		let end = start;
+		let allDay = true;
 		if (this._options.endKey) {
 			end = String(event.file.frontmatter[this._options.endKey]);
+			if (end) {
+				allDay = event.allDay;
+			}
 		}
 		return Event.reconstruct(
 			new Path(event.file.path),
@@ -35,7 +39,7 @@ export class EventReconstructor {
 			new DateTime({
 				start,
 				end,
-				allDay: event.allDay,
+				allDay,
 				format: this._options.dateFormat,
 			}),
 			new Metadata(event.metadata),

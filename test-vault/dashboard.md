@@ -8,7 +8,7 @@
       allDay: false
     })),
   options: {
-		dateFormat: "YYYY-MM-DD",
+		dateFormat: "YYYY-MM-DDTHH:mm:ss",
     startKey: "startDateTime",
     endKey: "endDateTime",
     defaultDate: {type: "fixed", date: "2024-08-01"},
