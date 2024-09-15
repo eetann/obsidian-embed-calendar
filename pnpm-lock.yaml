@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@types/react-big-calendar':
-        specifier: ^1.8.9
-        version: 1.8.9
+        specifier: ^1.8.11
+        version: 1.8.11
       dayjs:
         specifier: ^1.11.12
         version: 1.11.12
@@ -21,8 +21,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1
       react-big-calendar:
-        specifier: ^1.13.1
-        version: 1.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.14.0
+        version: 1.14.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
@@ -469,8 +469,8 @@ packages:
   '@lezer/common@1.2.1':
     resolution: {integrity: sha512-yemX0ZD2xS/73llMZIK6KplkjIjf2EvAHcinDi/TfJ9hS25G0388+ClHt6/3but0oOxinTcQHJLDXh6w1crzFQ==}
 
-  '@lezer/highlight@1.2.0':
-    resolution: {integrity: sha512-WrS5Mw51sGrpqjlh3d4/fOwpEV2Hd3YOkp9DBt4k8XZQcoTHZFB7sx030A6OcahF4J1nDQAa3jXlTVVYH50IFA==}
+  '@lezer/highlight@1.2.1':
+    resolution: {integrity: sha512-Z5duk4RN/3zuVO7Jq0pGLJ3qynpxUVsh7IbUbGj88+uV2ApSAn6kWg2au3iJb+0Zi7kKtqffIESgNcRXWZWmSA==}
 
   '@lezer/lr@1.4.2':
     resolution: {integrity: sha512-pu0K1jCIdnQ12aWNaAVU5bzi7Bd1w54J3ECgANPmYLtQKP0HBj2cE/5coBD66MT10xbtIuUr7tg0Shbsvk0mDA==}
@@ -594,8 +594,8 @@ packages:
   '@types/prop-types@15.7.12':
     resolution: {integrity: sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==}
 
-  '@types/react-big-calendar@1.8.9':
-    resolution: {integrity: sha512-HIHLUxR3PzWHrFdZ00VnCMvDjAh5uzlL0vMC2b7tL3bKaAJsqq9T8h+x0GVeDbZfMfHAd1cs5tZBhVvourNJXQ==}
+  '@types/react-big-calendar@1.8.11':
+    resolution: {integrity: sha512-/j9WOY79Q9A3cLtAa/cEKCi9DPmzcjfG7WaKW/6xlJOLFRkqCb0d2BRxtBETLO0yzLY/nDC95z9Cnp9vG2EmjQ==}
 
   '@types/react-dom@18.3.0':
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
@@ -1116,8 +1116,8 @@ packages:
       '@codemirror/state': ^6.0.0
       '@codemirror/view': ^6.0.0
 
-  obsidian@https://codeload.github.com/obsidianmd/obsidian-api/tar.gz/df9434bec6883bd32727f61b1ed1336f7663d0e4:
-    resolution: {tarball: https://codeload.github.com/obsidianmd/obsidian-api/tar.gz/df9434bec6883bd32727f61b1ed1336f7663d0e4}
+  obsidian@https://codeload.github.com/obsidianmd/obsidian-api/tar.gz/e523ed9c94480c8b5129d607b8ad5e4456cfcd3a:
+    resolution: {tarball: https://codeload.github.com/obsidianmd/obsidian-api/tar.gz/e523ed9c94480c8b5129d607b8ad5e4456cfcd3a}
     version: 1.6.6
     peerDependencies:
       '@codemirror/state': ^6.0.0
@@ -1251,8 +1251,8 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  react-big-calendar@1.13.1:
-    resolution: {integrity: sha512-6qg2ivBPnGPE+iJTJ6nNG/Kol0XElNzywWkwjjN0GtXjooHcS+9/UnpiCDuKzbele3iB6fWeobkSHWhI6xxKYw==}
+  react-big-calendar@1.14.0:
+    resolution: {integrity: sha512-hUAo2aV1ZJdmgDZjvHplfYzJ9YFRdGErVPjlR6J2E6IK4AyOEj9dXaQpKf56E3vgG4w40VT0B1J5dw7IQYVWmg==}
     peerDependencies:
       react: ^16.14.0 || ^17 || ^18
       react-dom: ^16.14.0 || ^17 || ^18
@@ -1655,7 +1655,7 @@ snapshots:
       '@codemirror/state': 6.4.1
       '@codemirror/view': 6.29.0
       '@lezer/common': 1.2.1
-      '@lezer/highlight': 1.2.0
+      '@lezer/highlight': 1.2.1
       '@lezer/lr': 1.4.2
       style-mod: 4.1.2
 
@@ -1838,7 +1838,7 @@ snapshots:
 
   '@lezer/common@1.2.1': {}
 
-  '@lezer/highlight@1.2.0':
+  '@lezer/highlight@1.2.1':
     dependencies:
       '@lezer/common': 1.2.1
 
@@ -1928,7 +1928,7 @@ snapshots:
 
   '@types/prop-types@15.7.12': {}
 
-  '@types/react-big-calendar@1.8.9':
+  '@types/react-big-calendar@1.8.11':
     dependencies:
       '@types/date-arithmetic': 4.1.4
       '@types/prop-types': 15.7.12
@@ -2480,7 +2480,7 @@ snapshots:
 
   obsidian-daily-notes-interface@0.8.4(@codemirror/state@6.4.1)(@codemirror/view@6.29.0):
     dependencies:
-      obsidian: https://codeload.github.com/obsidianmd/obsidian-api/tar.gz/df9434bec6883bd32727f61b1ed1336f7663d0e4(@codemirror/state@6.4.1)(@codemirror/view@6.29.0)
+      obsidian: https://codeload.github.com/obsidianmd/obsidian-api/tar.gz/e523ed9c94480c8b5129d607b8ad5e4456cfcd3a(@codemirror/state@6.4.1)(@codemirror/view@6.29.0)
       tslib: 2.1.0
     transitivePeerDependencies:
       - '@codemirror/state'
@@ -2506,7 +2506,7 @@ snapshots:
       '@types/codemirror': 5.60.8
       moment: 2.29.4
 
-  obsidian@https://codeload.github.com/obsidianmd/obsidian-api/tar.gz/df9434bec6883bd32727f61b1ed1336f7663d0e4(@codemirror/state@6.4.1)(@codemirror/view@6.29.0):
+  obsidian@https://codeload.github.com/obsidianmd/obsidian-api/tar.gz/e523ed9c94480c8b5129d607b8ad5e4456cfcd3a(@codemirror/state@6.4.1)(@codemirror/view@6.29.0):
     dependencies:
       '@codemirror/state': 6.4.1
       '@codemirror/view': 6.29.0
@@ -2620,7 +2620,7 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  react-big-calendar@1.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-big-calendar@1.14.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.25.0
       clsx: 1.2.1
