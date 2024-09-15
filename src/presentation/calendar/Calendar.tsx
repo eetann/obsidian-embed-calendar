@@ -91,6 +91,17 @@ export default function Calendar({ plugin, source }: Props) {
 					}
 					return { className: fontSize };
 				}}
+				// TODO: allDayのときの期間を正しく指定(accessorで sethours 12)
+				endAccessor={(event) => {
+					const end = event.end;
+					if (event.path === "zettelkasten/20240807104600.md") {
+						console.log(event);
+					}
+					if (event.allDay && event.end.getHours() === 0) {
+						end.setHours(12);
+					}
+					return end;
+				}}
 				onDragStart={() => {
 					console.log("onDragStart");
 					setIsDrag(true);

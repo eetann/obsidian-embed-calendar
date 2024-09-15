@@ -46,8 +46,9 @@ npm run watch
 - [x] 言語の変更
 - [x] エラー表示
 - [x] titleの改行を有効化
-- [ ] D&Dによる日時変更
-- [ ] allDayの期間の終わりを正しく表示
+- [x] D&Dによる日時移動
+- [x] allDayの期間の終わりを正しく表示
+- [ ] D&Dによる日時範囲の変更
 - [ ] 新しいノートの作成
 - [ ] テストの追加
   - [ ] 参考: https://github.com/ycnmhd/obsidian-lineage

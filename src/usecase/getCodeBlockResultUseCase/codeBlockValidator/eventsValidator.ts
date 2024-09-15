@@ -34,20 +34,28 @@ export class EventsValidator {
 	}
 
 	execute(data: unknown) {
-		const _result = v.safeParse(v.array(v.unknown()), data);
+		const _result = v.safeParse(v.array(v.any()), data);
 		if (!_result.success) {
 			throw new Error("Failed to parse events\nevents should be an array.");
 		}
 		const events: EventDTO[] = [];
 		for (const event of _result.output) {
-			const result = v.safeParse(this._EventSchema, event);
-			if (!result.success) {
+			try {
+				const result = v.safeParse(this._EventSchema, event);
+				if (!result.success) {
+					// TODO: エラーのあったeventは別途表示
+					throw new Error(
+						`Failed to parse events\n${getMessages(result.issues)}`,
+					);
+				}
+				events.push(new EventDTO(result.output));
+			} catch (e) {
+				console.log(`Failed to parse events\n${e}\npath:${event?.file?.path}`);
 				// TODO: エラーのあったeventは別途表示
-				throw new Error(
-					`Failed to parse events\n${getMessages(result.issues)}`,
-				);
+				// throw new Error(
+				// 	`Failed to parse events\n${e}\npath:${event?.file?.path}`,
+				// );
 			}
-			events.push(new EventDTO(result.output));
 		}
 		return events;
 	}
