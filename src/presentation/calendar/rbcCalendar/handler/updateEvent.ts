@@ -16,7 +16,7 @@ export class UpdateEvent {
 		setEvents: Dispatch<SetStateAction<EventDTO[] | null>>,
 	) {
 		this.options = options;
-		const fileRepository = new FileRepository(plugin);
+		const fileRepository = new FileRepository(plugin, options);
 		this.changeDateTime = new ChangeDateTimeUseCase(fileRepository);
 		this.setEvents = setEvents;
 	}

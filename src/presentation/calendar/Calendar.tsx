@@ -13,7 +13,7 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { useDnDContext } from "./provider/DnDContextProvider";
 import EventContent from "./rbcCalendar/EventContent";
 import { applyRowTypeStyle } from "./rbcCalendar/applyRowTypeStyle";
-import { UpdateEvent } from "./rbcCalendar/handler";
+import { UpdateEvent } from "./rbcCalendar/handler/updateEvent";
 import { cultures } from "./rbcCalendar/localization";
 import { useCodeBlock } from "./useCodeBlock";
 
