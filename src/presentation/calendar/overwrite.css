@@ -7,7 +7,11 @@
 }
 
 .rbc-off-range-bg {
-	background: var(--background-primary);
+	background-color: var(--background-primary);
+}
+
+.rbc-selected-cell {
+	background-color: var(--background-secondary-alt)
 }
 
 .rbc-toolbar button {
