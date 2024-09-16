@@ -49,7 +49,8 @@ npm run watch
 - [x] D&Dによる日時移動
 - [x] allDayの期間の終わりを正しく表示
 - [x] D&Dによる日時範囲の変更
-- [ ] weekやDayで、短い期間でも選択可能にする
 - [ ] 新しいノートの作成
+- [ ] metadataの表示
+- [ ] weekやDayで、短い期間でも選択可能にする
 - [ ] テストの追加
   - [ ] 参考: https://github.com/ycnmhd/obsidian-lineage

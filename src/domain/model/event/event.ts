@@ -11,6 +11,15 @@ export class Event {
 		private _metadata: Metadata,
 	) {}
 
+	static create(
+		path: Path,
+		title: Title,
+		dateTime: DateTime,
+		metadata: Metadata,
+	) {
+		return new Event(path, title, dateTime, metadata);
+	}
+
 	static reconstruct(
 		path: Path,
 		title: Title,
