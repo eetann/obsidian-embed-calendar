@@ -11,6 +11,8 @@
 		dateFormat: "YYYY-MM-DDTHH:mm:ss",
     startKey: "startDateTime",
     endKey: "endDateTime",
+    newNoteFolder: "inbox",
+    newNoteNameType: {type: "date", format:"YYYYMMDDHHmmss"},
     defaultDate: {type: "fixed", date: "2024-08-01"},
 		eventRowType: {type: "auto", rowNumber: 2},
 		language: "ja",

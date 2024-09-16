@@ -13,6 +13,7 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { useDnDContext } from "./provider/DnDContextProvider";
 import EventContent from "./rbcCalendar/EventContent";
 import { applyRowTypeStyle } from "./rbcCalendar/applyRowTypeStyle";
+import { CreateEvent } from "./rbcCalendar/handler/createEvent";
 import { UpdateEvent } from "./rbcCalendar/handler/updateEvent";
 import { cultures } from "./rbcCalendar/localization";
 import { useCodeBlock } from "./useCodeBlock";
@@ -56,6 +57,7 @@ export default function Calendar({ plugin, source }: Props) {
 	const lang = options.language;
 	const defaultDate = new GetDefaultDateUseCase().execute(options.defaultDate);
 	const updateEvent = new UpdateEvent(plugin, options, setEvents);
+	const createEvent = new CreateEvent(plugin, options, setEvents);
 
 	return (
 		<div
@@ -114,8 +116,10 @@ export default function Calendar({ plugin, source }: Props) {
 					updateEvent.execute(args);
 					setIsDrag(false);
 				}}
-				onSelectSlot={() => {
+				selectable={true}
+				onSelectSlot={(slotInfo) => {
 					console.log("onSelectSlot");
+					createEvent.execute(slotInfo);
 				}}
 			/>
 		</div>
