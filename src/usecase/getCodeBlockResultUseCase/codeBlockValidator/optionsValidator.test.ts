@@ -10,7 +10,7 @@ describe("OptionsValidator.test", () => {
 	const errorMessage = "Failed to parse options\n";
 	const expectMinimumOptions = {
 		...minimumOptions,
-		newNotePathType: { type: "modal" },
+		newNoteNameType: { type: "modal" },
 		newNoteMethodType: { type: "scratch" },
 		defaultDate: { type: "today" },
 		defaultView: "month",
@@ -43,13 +43,13 @@ describe("OptionsValidator.test", () => {
 		).toThrow(`${errorMessage}endKey: Write at least one character`);
 	});
 
-	it("Error if a non-existent newNotePathType is specified", () => {
+	it("Error if a non-existent newNoteNameType is specified", () => {
 		expect(() =>
 			optionsValidator.execute({
 				...minimumOptions,
-				newNotePathType: "ninja",
+				newNoteNameType: "ninja",
 			}),
-		).toThrow(`${errorMessage}newNotePathType: Expected "date" | "modal"`);
+		).toThrow(`${errorMessage}newNoteNameType: Expected "date" | "modal"`);
 	});
 
 	it("Error if a non-existent newNoteMethodType is specified", () => {
