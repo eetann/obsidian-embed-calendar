@@ -23,11 +23,32 @@ const EventRowTypeSchema = v.variant(
 	'Expected "oneLine" | "auto" | "manual"',
 );
 
+const NewNotePathTypeSchema = v.variant(
+	"type",
+	[
+		v.object({ type: v.literal("date"), format: NonEmptySchema }),
+		v.object({ type: v.literal("modal") }),
+	],
+	'Expected "date" | "modal"',
+);
+
+const NewNoteMethodTypeSchema = v.variant(
+	"type",
+	[
+		v.object({ type: v.literal("copy"), path: NonEmptySchema }),
+		v.object({ type: v.literal("templater"), path: NonEmptySchema }),
+		v.object({ type: v.literal("scratch") }),
+	],
+	'Expected "copy" | "templater" | "scratch"',
+);
+
 const OptionsSchema = v.object({
 	// example: YYYY-MM-DD, YYYY-MM-DDTHH:mm:ss
 	dateFormat: NonEmptySchema,
 	startKey: NonEmptySchema,
 	endKey: v.optional(NonEmptySchema),
+	newNotePathType: v.optional(NewNotePathTypeSchema, { type: "modal" }),
+	newNoteMethodType: v.optional(NewNoteMethodTypeSchema, { type: "scratch" }),
 	defaultDate: v.optional(DefaultDateSchema, { type: "today" }),
 	defaultView: v.optional(
 		v.picklist(

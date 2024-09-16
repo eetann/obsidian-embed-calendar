@@ -2,10 +2,15 @@ import { OptionsValidator } from "./optionsValidator";
 
 describe("OptionsValidator.test", () => {
 	const optionsValidator = new OptionsValidator();
-	const minimumOptions = { dateFormat: "YYYY-MM-DD", startKey: "start" };
+	const minimumOptions = {
+		dateFormat: "YYYY-MM-DD",
+		startKey: "start",
+	};
 	const errorMessage = "Failed to parse options\n";
 	const expectMinimumOptions = {
 		...minimumOptions,
+		newNotePathType: { type: "modal" },
+		newNoteMethodType: { type: "scratch" },
 		defaultDate: { type: "today" },
 		defaultView: "month",
 		calendarHeight: 500,
@@ -35,6 +40,26 @@ describe("OptionsValidator.test", () => {
 		expect(() =>
 			optionsValidator.execute({ ...minimumOptions, endKey: "" }),
 		).toThrow(`${errorMessage}endKey: Write at least one character`);
+	});
+
+	it("Error if a non-existent newNotePathType is specified", () => {
+		expect(() =>
+			optionsValidator.execute({
+				...minimumOptions,
+				newNotePathType: "ninja",
+			}),
+		).toThrow(`${errorMessage}newNotePathType: Expected "date" | "modal"`);
+	});
+
+	it("Error if a non-existent newNoteMethodType is specified", () => {
+		expect(() =>
+			optionsValidator.execute({
+				...minimumOptions,
+				newNoteMethodType: "ninja",
+			}),
+		).toThrow(
+			`${errorMessage}newNoteMethodType: Expected "copy" | "templater" | "scratch"`,
+		);
 	});
 
 	it("Error if a non-existent view is specified", () => {
