@@ -16,6 +16,7 @@ describe("CodeBlockValidator", () => {
 			options: {
 				dateFormat: "YYYY-MM-DD",
 				startKey: "start",
+				newNoteFolder: "inbox",
 			},
 		};
 		const result = codeBlockValidator.execute(data);

@@ -5,6 +5,7 @@ describe("OptionsValidator.test", () => {
 	const minimumOptions = {
 		dateFormat: "YYYY-MM-DD",
 		startKey: "start",
+		newNoteFolder: "inbox",
 	};
 	const errorMessage = "Failed to parse options\n";
 	const expectMinimumOptions = {

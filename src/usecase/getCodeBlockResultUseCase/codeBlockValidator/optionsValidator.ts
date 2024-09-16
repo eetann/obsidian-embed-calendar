@@ -47,7 +47,8 @@ const OptionsSchema = v.object({
 	dateFormat: NonEmptySchema,
 	startKey: NonEmptySchema,
 	endKey: v.optional(NonEmptySchema),
-	newNotePathType: v.optional(NewNotePathTypeSchema, { type: "modal" }),
+	newNoteFolder: NonEmptySchema,
+	newNoteNameType: v.optional(NewNotePathTypeSchema, { type: "modal" }),
 	newNoteMethodType: v.optional(NewNoteMethodTypeSchema, { type: "scratch" }),
 	defaultDate: v.optional(DefaultDateSchema, { type: "today" }),
 	defaultView: v.optional(
