@@ -49,8 +49,9 @@ npm run watch
 - [x] D&Dによる日時移動
 - [x] allDayの期間の終わりを正しく表示
 - [x] D&Dによる日時範囲の変更
-- [ ] 新しいノートの作成
-- [ ] metadataの表示
+- [x] 新しいノートの作成
 - [ ] weekやDayで、短い期間でも選択可能にする
+- [ ] Dataviewの読み込みができるまでは表示しない
+- [ ] metadataの表示
 - [ ] テストの追加
   - [ ] 参考: https://github.com/ycnmhd/obsidian-lineage
