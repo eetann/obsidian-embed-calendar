@@ -2,7 +2,7 @@ import "./overwrite.css";
 import type { EventDTO } from "@/usecase/event/eventDTO";
 import { GetDefaultDateUseCase } from "@/usecase/options/getDefaultDateUseCase";
 import dayjs from "dayjs";
-import type { Plugin } from "obsidian";
+import { type Plugin, TFile } from "obsidian";
 import { useEffect, useMemo } from "react";
 import {
 	type Components,
@@ -116,9 +116,15 @@ export default function Calendar({ plugin, source }: Props) {
 					updateEvent.execute(args);
 					setIsDrag(false);
 				}}
+				onDoubleClickEvent={(event) => {
+					console.log("onDoubleClickEvent");
+					const file = plugin.app.vault.getAbstractFileByPath(event.path);
+					if (file instanceof TFile) {
+						plugin.app.workspace.getLeaf().openFile(file);
+					}
+				}}
 				selectable={true}
 				onSelectSlot={(slotInfo) => {
-					console.log("onSelectSlot");
 					createEvent.execute(slotInfo);
 				}}
 			/>
