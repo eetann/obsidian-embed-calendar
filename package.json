@@ -38,6 +38,7 @@
 		"@types/react-big-calendar": "^1.8.11",
 		"dayjs": "^1.11.12",
 		"es-toolkit": "^1.16.0",
+		"html-react-parser": "^5.1.16",
 		"react": "^18.3.1",
 		"react-big-calendar": "^1.14.0",
 		"react-dom": "^18.3.1",

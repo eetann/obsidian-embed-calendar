@@ -1,4 +1,5 @@
 import type { EventDTO } from "@/usecase/event/eventDTO";
+import parse from "html-react-parser";
 import type { EventProps } from "react-big-calendar";
 import { tv } from "tailwind-variants";
 import { useDnDContext } from "../provider/DnDContextProvider";
@@ -16,21 +17,27 @@ const style = tv({
 export default function EventContent({ event }: EventProps<EventDTO>) {
 	const { isDrag, setIsDrag } = useDnDContext();
 	return (
-		<a
-			target="_blank"
-			rel="noreferrer noopener"
-			className={style({ isDrag })}
-			data-href={event.path}
-			href={event.path}
-			onMouseUp={() => {
-				// 1. onMouseUp
-				// 2. setIsDrag(false)
-				// 3. "internal-link" makes this back to obsidian internal-link
-				// 4. href
-				setIsDrag(false);
-			}}
-		>
-			{event.title}
-		</a>
+		<>
+			<a
+				target="_blank"
+				rel="noreferrer noopener"
+				className={style({ isDrag })}
+				data-href={event.path}
+				href={event.path}
+				onMouseUp={() => {
+					// 1. onMouseUp
+					// 2. setIsDrag(false)
+					// 3. "internal-link" makes this back to obsidian internal-link
+					// 4. href
+					setIsDrag(false);
+				}}
+			>
+				{event.title}
+			</a>
+			{/* TODO: ここにmetadataが正しく表示されるか */}
+			{typeof event.metadata === "string"
+				? parse(event.metadata)
+				: event.metadata}
+		</>
 	);
 }
