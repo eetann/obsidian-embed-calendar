@@ -52,7 +52,7 @@ npm run watch
 - [x] 新しいノートの作成
 - [x] weekやDayで、短い期間でも選択可能にする
 	- [x] weekやdayでホバーの範囲を文字列以外でも可能にする
-- [ ] Dataviewの読み込みができるまでは表示しない
+- [x] Dataviewの読み込みができるまでは表示しない
 - [ ] metadataの表示
 - [ ] テストの追加
   - [ ] 参考: https://github.com/ycnmhd/obsidian-lineage
