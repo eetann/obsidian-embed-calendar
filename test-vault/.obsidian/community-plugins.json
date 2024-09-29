@@ -1,5 +1,6 @@
 [
   "dataview",
   "hot-reload",
-  "obsidian-embed-calendar"
+  "obsidian-embed-calendar",
+  "metadata-menu"
 ]
