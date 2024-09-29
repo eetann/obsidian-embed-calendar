@@ -15,7 +15,6 @@ const DEFAULT_SETTINGS: EmbedCalendarSettings = {
 };
 
 export default class EmbedCalendar extends Plugin {
-	private _language = "embed-calendar";
 	settings: EmbedCalendarSettings;
 
 	async onload() {

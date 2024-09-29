@@ -17,7 +17,6 @@ export class EmbedCalendarAPI {
 	plugin: Plugin;
 	constructor(plugin: Plugin) {
 		this.plugin = plugin;
-		console.log({ plugin });
 	}
 
 	public make(): IEmbedCalendarAPI {
@@ -26,9 +25,10 @@ export class EmbedCalendarAPI {
 		};
 	}
 
-	// TODO: この関数が呼ばれていない？
 	renderCalendar() {
 		return (containerEl: Element, rawEvents: unknown, rawOptions: unknown) => {
+			// As it is executed multiple times by dataview, the following warning is displayed.
+			// createRoot() on a container that has already been passed to createRoot() before...
 			const root = createRoot(containerEl);
 			root.render(
 				<StrictMode>
