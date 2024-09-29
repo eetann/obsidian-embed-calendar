@@ -23,13 +23,18 @@ const localizer = dayjsLocalizer(dayjs);
 
 type Props = {
 	plugin: Plugin;
-	source: string;
+	rawEvents: unknown;
+	rawOptions: unknown;
 };
 
-export default function Calendar({ plugin, source }: Props) {
+export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 	// To set CSS variables for each Calendar
 	const calendarId = crypto.randomUUID();
-	const { options, events, setEvents, error } = useCodeBlock(plugin, source);
+	const { options, events, setEvents, error } = useCodeBlock(
+		plugin,
+		rawEvents,
+		rawOptions,
+	);
 	const { setIsDrag } = useDnDContext();
 	const components: Components<EventDTO> = useMemo(
 		() => ({
@@ -47,6 +52,7 @@ export default function Calendar({ plugin, source }: Props) {
 	}, [options, calendarId]);
 
 	if (error) {
+		console.log(error);
 		return <pre>{String(error)}</pre>;
 	}
 

@@ -15,7 +15,11 @@ declare module "obsidian" {
 	}
 }
 
-export function useCodeBlock(plugin: Plugin, source: string) {
+export function useCodeBlock(
+	plugin: Plugin,
+	rawEvents: unknown,
+	rawOptions: unknown,
+) {
 	const [options, setOptions] = useState<OptionsType | null>(null);
 	const [events, setEvents] = useState<EventDTO[] | null>(null);
 	const [error, setError] = useState(null);
@@ -24,7 +28,7 @@ export function useCodeBlock(plugin: Plugin, source: string) {
 		let ignore = false;
 		const getCodeBlockResult = () => {
 			new GetCodeBlockResultUseCase()
-				.execute(source)
+				.execute(rawEvents, rawOptions)
 				.then((codeblock) => {
 					if (!ignore) {
 						setOptions(codeblock.options);
@@ -47,7 +51,7 @@ export function useCodeBlock(plugin: Plugin, source: string) {
 		return () => {
 			ignore = true;
 		};
-	}, [source, plugin]);
+	}, [rawEvents, rawOptions, plugin]);
 
 	return { options, events, setEvents, error };
 }

@@ -34,10 +34,17 @@ export default function EventContent({ event }: EventProps<EventDTO>) {
 			>
 				{event.title}
 			</a>
-			{/* TODO: ここにmetadataが正しく表示されるか */}
-			{typeof event.metadata === "string"
-				? parse(event.metadata)
-				: event.metadata}
+			{typeof event.metadata === "string" ? (
+				parse(event.metadata)
+			) : event.metadata ? (
+				<div
+					ref={(ref) => ref?.appendChild(event.metadata as Node)}
+					onMouseDown={(e) => {
+						// prioritize event.metadata over react-big-calendar
+						e.stopPropagation();
+					}}
+				/>
+			) : undefined}
 		</>
 	);
 }
