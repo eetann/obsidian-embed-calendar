@@ -1,15 +1,16 @@
 🚧 WIP!!! 🚧
 
 # Obsidian Embed Calendar
-This plugin provides the feature of displaying an embeddable calendar in obsidian.
+You can embed a calendar in your Obsidian notes with this plugin.
 
 <!-- TODO: ここに画像 -->
 
 ## Features
 
-- ホバー
+- ホバープレビュー
+- 週表示や日表示もできる
 - 自由に表示できるスペースがある
-- metadataのプラグインと連携可能
+	- metadataのプラグインと連携可能
 
 
 ## Installation
@@ -82,7 +83,13 @@ npm run watch
 - [x] metadataの表示
 	- [x] metadataを複数表示
 - [x] metadata menuの対応
-- [x] リンクCSSの解除
+- [x] app.cssの移行と
+- [x] リンクCSSの解除をtailwindに戻す
+- [x] サンプルのmdをdataviewjsに移行
+- [ ] Settingsなど不要な部分を削除
+- [ ] パースに失敗したEventをまとめて表示
+	- [ ] 日時未定の場合は別途表示したい
+- [ ] DevelopにMetadata Menuの設定例も書く
 - [ ] DnDでendが無い場合は二日以上にさせない
 - [ ] テストの追加
   - [ ] 参考: https://github.com/ycnmhd/obsidian-lineage

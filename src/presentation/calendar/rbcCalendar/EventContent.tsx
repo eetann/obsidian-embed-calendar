@@ -7,7 +7,7 @@ import { useDnDContext } from "../provider/DnDContextProvider";
 const style = tv({
 	base: [
 		// make it easy to see
-		"p-1 text-white no-underline hover:text-white hover:no-underline",
+		"text-white no-underline hover:text-white hover:no-underline",
 		// To extend the link range to the entire box
 		"block h-full",
 	],
