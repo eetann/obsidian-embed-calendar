@@ -1,7 +1,6 @@
 export class CodeBlockLoader {
 	async execute(source: string) {
 		try {
-			// TODO: ここで使うdvはpagesとかだけ？elは使えない？
 			const func = new Function(
 				`return new Promise((s,r)=>{(async ()=>{
 const dv = DataviewAPI;

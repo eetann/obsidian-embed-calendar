@@ -86,6 +86,7 @@ npm run watch
 - [x] app.cssの移行と
 - [x] リンクCSSの解除をtailwindに戻す
 - [x] サンプルのmdをdataviewjsに移行
+- [x] ビルドが本番でも動くように変更
 - [ ] Settingsなど不要な部分を削除
 - [ ] パースに失敗したEventをまとめて表示
 	- [ ] 日時未定の場合は別途表示したい

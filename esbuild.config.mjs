@@ -1,8 +1,8 @@
+import fs from "node:fs";
+import path from "node:path";
+import process from "node:process";
 import builtins from "builtin-modules";
 import esbuild from "esbuild";
-import process from "node:process";
-import path from "node:path";
-import fs from "node:fs";
 import PostcssPlugin from "./esbuild-postcss.mjs";
 
 const banner = `/*
@@ -12,9 +12,6 @@ if you want to view the source, please visit the github repository of this plugi
 `;
 
 const prod = process.argv[2] === "production";
-const VAULT_PATH = process.env.VAULT_PATH;
-const PLUGIN_PATH = `${VAULT_PATH}/.obsidian/plugins/obsidian-embed-calendar`;
-console.log(PLUGIN_PATH);
 
 const copyFiles = [
 	{ from: "dist/main.js", to: "main.js" },
@@ -26,11 +23,19 @@ const myCopy = {
 	name: "my-copy",
 	setup(build) {
 		build.onEnd(async () => {
-			for (const copyFile of copyFiles) {
-				fs.copyFileSync(copyFile.from, path.join(PLUGIN_PATH, copyFile.to));
-			}
+			let destination = ".";
 			if (!prod) {
-				fs.writeFileSync(path.join(PLUGIN_PATH, ".hotreload"), "");
+				const VAULT_PATH = process.env.VAULT_PATH;
+				destination = `${VAULT_PATH}/.obsidian/plugins/obsidian-embed-calendar`;
+				console.log(destination);
+
+				if (!fs.existsSync(destination)) {
+					fs.mkdirSync(destination);
+				}
+				fs.writeFileSync(path.join(destination, ".hotreload"), "");
+			}
+			for (const copyFile of copyFiles) {
+				fs.copyFileSync(copyFile.from, path.join(destination, copyFile.to));
 			}
 		});
 	},
