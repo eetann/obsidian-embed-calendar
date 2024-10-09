@@ -3,32 +3,197 @@
 # Obsidian Embed Calendar
 You can embed a calendar in your Obsidian notes with this plugin.
 
-<!-- TODO: ここに画像 -->
+![Month View](./docs/images/view-month.jpg)
 
 ## Features
 
-- ホバープレビュー
-- 週表示や日表示もできる
-- 自由に表示できるスペースがある
-	- metadataのプラグインと連携可能
+- 🗓️ Supports month/week/day/agenda views
+- 🖱️ Drag-and-drop date change
+- 🆕 Create a new note with a specific date
+- 🔍 Query of notes by plugin [Dataview](https://blacksmithgu.github.io/obsidian-dataview/)
+- 👁️ Hover Preview
+- 📝 Information other than the title can be freely displayed
+- ⚙️ Possible to place any property change buttons if plugin [Metadata Menu](https://mdelobelle.github.io/metadatamenu/) is installed
 
 
 ## Installation
-
+🚧 WIP!!! 🚧
+Maybe you can install this with [BRAT](https://tfthacker.com/BRAT).
 
 ## QuickStart
+Call `renderCalendar` as follows.
 
 ````
-```embed-calendar
-
+```dataviewjs
+renderCalendar(
+  this.container,
+  dv.pages('"inbox"').map((p) => ({
+    file: p.file,
+    title: p.file.name,
+    allDay: true,
+  })),
+  {
+    dateFormat: "YYYY-MM-DD",
+    startKey: "startDate",
+    endKey: "endDate",
+    newNoteFolder: "inbox",
+    newNoteNameType: { type: "date", format: "YYYYMMDD" },
+  },
+);
 ```
 ````
 
 
 ## Usage
+`renderCalendar` has 3 arguments.
+
+1. This is the spell you need to display. Write `this.container`
+2. query for notes using dataview
+3. calendar options
+
+Since 1 is fixed, let's take a closer look at 2 and 3.
+
+## query for notes using dataview (2nd argument)
+For this argument, pass an array of notes using dataview.
+
+```js
+dv.pages('"your-folder"').map((p) => ({
+  file: p.file,
+  title: p.file.name,
+  allDay: true,
+})),
+```
+
+The array of notes is processed as follows
+
+| key      | description                                                         | required                    | example                      |
+|----------|---------------------------------------------------------------------|-----------------------------|------------------------------|
+| file     | Pass `file`. Fixed.                                                 | required                    | `p.file`                     |
+| title    | String to be displayed as the title.                                | required                    | `p.file.name`                |
+| allDay   | Whether the date is all day or not.                                 | optional. Default is `true` | `true`                       |
+| metadata | If you pass a string or HTML, it will be displayed under the title. | optional. Default is `null` | `p.file.frontmatter['foo']` |
+
+### metadata example
+If you write `p.file.frontmatter['foo']` in `metadata`, you can display the value of the property (frontmatter).
+
+If a string is passed, it is interpreted as HTML.
+
+```js
+metadata: "<p style='background-color:olive'>&#x1f977;Ninja</p>",
+```
+
+![metadata-something](./docs/images/metadata-something.jpg)
+
+You can also write a process that returns an HTMLElement like [Metadata Menu](https://mdelobelle.github.io/metadatamenu/)'s API `fieldModifier`.
+
+To display 1 property in Metadata Menu's API, write as follows.
+
+```js 
+const { fieldModifier: f } = MetadataMenu.api;
+renderCalendar(
+  this.container,
+  dv.pages('"your-folder"').map((p) => ({
+    file: p.file,
+    title: p.file.name,
+    allDay: false,
+    metadata: f(dv, p, "check"),
+  })),
+  // ...
+);
+```
+
+To display multiple properties in Metadata Menu's API, write as follows.
+
+```js
+const { fieldModifier: f } = MetadataMenu.api;
+renderCalendar(
+  this.container,
+  dv.pages('"your-folder"').map((p) => {
+    const metaDiv = dv.el("div", "");
+    metaDiv.appendChild(f(dv, p, "check"));
+    metaDiv.appendChild(f(dv, p, "status"));
+    return {
+      file: p.file,
+      title: p.file.name,
+      allDay: false,
+      metadata: metaDiv,
+    };
+  }),
+  // ...
+);
+```
+
+![metadata-menu](./docs/images/metadata-menu.jpg)
+
+
+## calendar options (3rd argument)
+
+| key               | required |
+|-------------------|----------|
+| dateFormat        | required |
+| startKey          | required |
+| endKey            | optional |
+| newNoteFolder     | required |
+| newNoteNameType   | optional |
+| newNoteMethodType | optional |
+| defaultDate       | optional |
+| defaultView       | optional |
+| calendarHeight    | optional |
+| eventFontSize     | optional |
+| eventRowType      | optional |
+| language          | optional |
+
+### dateFormat
+Required.  
+Format of key to be used as date.
+See [Day.js](https://day.js.org/docs/en/parse/string-format#list-of-all-available-parsing-tokens) for detailed format writing instructions.
+
+example:
+```js
+dateFormat: "YYYY-MM-DD",
+```
+
+### startKey
+Required.  
+Key for the property of the note you want to treat as the start date and time of the event.
+
+example:
+```js
+startKey: "date",
+```
+
+### endKey
+Optional.  
+Key for the property of the note you want to treat as the end date and time of the event.
+
+If not written, the calendar will treat it as an “All-day Event that occurs on the day of startKey”.
+
+example:
+```js
+endKey: "endDate",
+```
+
+### newNoteFolder
+Required.  
+<!-- TODO: ここから -->
+
+example:
+```js
+
+```
+
+
+
+![month view](./docs/images/view-month.jpg)
+
+![day view](./docs/images/day-month.jpg)
+
+![hover preview](./docs/images/hover-preview.jpg)
+
+![japanese view](./docs/images/view-japanese.jpg)
 
 ## Contributing
-WIP
+🚧 WIP!!! 🚧
 
 Set your vault path in `.env` as follows.
 
@@ -37,7 +202,7 @@ VAULT_PATH="<your-vault>"
 # VAULT_PATH="/mnt/z/example-vault"
 ```
 
-(Optional) Copy Example Vault as follows.
+(Optional) It can be copied to the Vault for development. **All existing notes will be lost.**
 
 ```sh
 npm run copy-vault
@@ -45,20 +210,17 @@ npm run copy-vault
 ```
 
 Install [pjeby/hot-reload](https://github.com/pjeby/hot-reload).
+If hot-reload is already installed, turn hot-reload off once and then on again to recognize this plugin.
 
-Execute the following two commands simultaneously.
+Execute the following.
 
 ```sh
 npm run dev
 # pnpm run dev
 ```
 
-```sh
-npm run watch
-# pnpm run watch
-```
-
 ## Roadmap
+This section is for my own use, so I might move it to GitHub's Project or something.
 
 - [x] リンクを有効化
 - [x] allDayのときのend
@@ -87,7 +249,7 @@ npm run watch
 - [x] リンクCSSの解除をtailwindに戻す
 - [x] サンプルのmdをdataviewjsに移行
 - [x] ビルドが本番でも動くように変更
-- [ ] Settingsなど不要な部分を削除
+- [x] Settingsなど不要な部分を削除
 - [ ] パースに失敗したEventをまとめて表示
 	- [ ] 日時未定の場合は別途表示したい
 - [ ] DevelopにMetadata Menuの設定例も書く

@@ -16,7 +16,6 @@ renderCalendar(
     newNoteNameType: { type: "date", format: "YYYY-MM-DD" },
     defaultDate: { type: "fixed", date: "2024-09-23" },
     eventRowType: { type: "manual" },
-    language: "ja",
   },
 );
 ```
@@ -44,7 +43,7 @@ renderCalendar(
     newNoteNameType: { type: "date", format: "YYYY-MM-DD" },
     defaultDate: { type: "fixed", date: "2024-09-23" },
     eventRowType: { type: "manual" },
-    language: "ja",
+    eventFontSize: "sm",
   },
 );
 ```
