@@ -25,7 +25,7 @@ renderCalendar(
   this.container,
   dv.pages('"zettelkasten"').map((p) => ({
     file: p.file,
-    title: p.file.frontmatter.title,
+    title: `${p.file.frontmatter.title}\nself new line`,
     metadata: "<p style='background-color:olive'>&#x1f977;Ninja</p>",
     allDay: true,
   })),

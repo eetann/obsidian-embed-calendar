@@ -1,7 +1,6 @@
-import type { OptionsType } from "src/calendar/schema/options";
+import type { OptionsType } from "@/usecase/getCodeBlockResultUseCase/codeBlockValidator/optionsValidator";
 
-// TODO:
-/* ref: src/calendar/overwrite.css */
+// ref: src/calendar/overwrite.css
 
 function setProperty(calendarId: string, name: string, value: string) {
 	document

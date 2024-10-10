@@ -1,7 +1,5 @@
-🚧 WIP!!! 🚧
-
 # Obsidian Embed Calendar
-You can embed a calendar in your Obsidian notes with this plugin.
+With this plugin, you can embed the calendar in the Obsidian note in the code block.
 
 ![Month View](./docs/images/view-month.jpg)
 
@@ -15,10 +13,16 @@ You can embed a calendar in your Obsidian notes with this plugin.
 - 📝 Information other than the title can be freely displayed
 - ⚙️ Possible to place any property change buttons if plugin [Metadata Menu](https://mdelobelle.github.io/metadatamenu/) is installed
 
+![day view](./docs/images/view-day.jpg)
+
+![hover preview](./docs/images/hover-preview.jpg)
 
 ## Installation
 🚧 WIP!!! 🚧
 Maybe you can install this with [BRAT](https://tfthacker.com/BRAT).
+
+- [Dataview](https://blacksmithgu.github.io/obsidian-dataview/) is required.
+- [Metadata Menu](https://mdelobelle.github.io/metadatamenu/) is optional.
 
 ## QuickStart
 Call `renderCalendar` as follows.
@@ -135,8 +139,7 @@ renderCalendar(
 | endKey            | optional |
 | newNoteFolder     | required |
 | newNoteNameType   | optional |
-| newNoteMethodType | optional |
-| defaultDate       | optional |
+| defaultDateType   | optional |
 | defaultView       | optional |
 | calendarHeight    | optional |
 | eventFontSize     | optional |
@@ -145,7 +148,7 @@ renderCalendar(
 
 ### dateFormat
 Required.  
-Format of key to be used as date.
+Format of key to be used as date.  
 See [Day.js](https://day.js.org/docs/en/parse/string-format#list-of-all-available-parsing-tokens) for detailed format writing instructions.
 
 example:
@@ -175,20 +178,166 @@ endKey: "endDate",
 
 ### newNoteFolder
 Required.  
-<!-- TODO: ここから -->
+Folder for creating new notes. New notes are created by clicking on an empty space in the calendar or by drag-and-drop.
 
 example:
 ```js
+newNoteFolder: "inbox",
+```
 
+### newNoteNameType
+Optional.  
+This is a way to determine the name of the new note. Currently there is only one type `date`.  
+Default is as follows.
+```js
+{
+  type: "date",
+  format: "YYYYMMDDHHmmss",
+},
+```
+
+example:
+```js
+newNoteNameType: { type: "date", format: "YYYY-MM-DD" },
+```
+
+#### type: date
+Specify the date and time format as the name of the note.
+
+```js
+{
+	type: "date",
+	format: "YYYYMMDDHHmmss",
+},
 ```
 
 
+### defaultDateType
+Optional.  
+The date type on which the calendar will be based when it is first displayed.  
+Default type is `today`.
 
-![month view](./docs/images/view-month.jpg)
+example:
+```js
+defaultDateType: { type: "fixed", date: "2024-08-01" },
+```
 
-![day view](./docs/images/day-month.jpg)
+#### type: today
+Today's date is used as the basis for when the calendar is first displayed.
 
-![hover preview](./docs/images/hover-preview.jpg)
+```js
+{ type: "today" },
+```
+
+#### type: fixed
+The date specified in `date` is used as the basis for when the calendar is first displayed.
+
+```js
+defaultDateType: { type: "fixed", date: "2024-04-20" },
+```
+
+### defaultView
+Optional.  
+View to be treated as default from the following list.
+
+- month
+- week
+- day
+- agenda
+
+Default is `month`.
+
+example:
+```js
+defaultView: "week",
+```
+
+### calendarHeight
+Optional.  
+Calendar height in pixels.  
+Default is `500`
+
+example:
+```js
+calendarHeight: 600,
+```
+
+### eventFontSize
+Optional.  
+Event text size from the following list.  
+
+- xs
+- sm
+- base
+- lg
+
+default is `xs`
+
+example:
+```js
+eventFontSize: "base",
+```
+
+### eventRowType
+Optional.  
+Decide how many lines the title of the event will be from the following list.
+
+- oneLine
+- auto
+- manual
+
+default:
+```js
+eventRowType: { type: "oneLine" },
+```
+
+#### type: oneLine
+Make the title of the Event one line.
+
+```js
+eventRowType: { type: "oneLine" },
+```
+
+#### type: auto
+Automatically adjusts the title of the Event so that the specified number of lines are displayed.
+
+```js
+eventRowType: { type: "auto", rowNumber: 2 },
+```
+
+#### type: manual
+You can put `\n` in the string to determine the line break position yourself.
+
+Example of how to write in code block:
+
+```js
+renderCalendar(
+  this.container,
+  dv.pages('"zettelkasten"').map((p) => ({
+    file: p.file,
+    title: `${p.file.frontmatter.title}\nself new line`,
+  })),
+  {
+    eventRowType: { type: "manual" },
+		// ...
+  },
+);
+```
+
+
+### language
+Optional.  
+Calendar Language. Choose from the following list.
+
+- en (English)
+- ja (Japanese)
+
+Default is `en`.
+
+example:
+```js
+language: "ja",
+```
 
 ![japanese view](./docs/images/view-japanese.jpg)
 
@@ -211,6 +360,13 @@ npm run copy-vault
 
 Install [pjeby/hot-reload](https://github.com/pjeby/hot-reload).
 If hot-reload is already installed, turn hot-reload off once and then on again to recognize this plugin.
+
+Install and configure the following two.
+
+- [Dataview](https://blacksmithgu.github.io/obsidian-dataview/)
+	- No setting required
+- [Metadata Menu](https://mdelobelle.github.io/metadatamenu/)
+	- Set `FileClass seettings` > `Class Files path` to `fileclass/` and **press the Save button**.
 
 Execute the following.
 
@@ -252,7 +408,8 @@ This section is for my own use, so I might move it to GitHub's Project or someth
 - [x] Settingsなど不要な部分を削除
 - [ ] パースに失敗したEventをまとめて表示
 	- [ ] 日時未定の場合は別途表示したい
-- [ ] DevelopにMetadata Menuの設定例も書く
+- [ ] newNoteMethodTypeの実装
+- [ ] Develop向けに、Metadata Menuを自動で設定できるようにする
 - [ ] DnDでendが無い場合は二日以上にさせない
 - [ ] テストの追加
   - [ ] 参考: https://github.com/ycnmhd/obsidian-lineage

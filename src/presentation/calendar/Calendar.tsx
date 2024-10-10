@@ -39,8 +39,6 @@ export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 	const components: Components<EventDTO> = useMemo(
 		() => ({
 			event: EventContent,
-			// TODO: weekやDayで、短い期間でも選択可能にする
-			// eventContainerWrapper: ,
 		}),
 		[],
 	);
