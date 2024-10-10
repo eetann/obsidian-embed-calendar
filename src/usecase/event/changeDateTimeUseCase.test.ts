@@ -25,7 +25,7 @@ describe("ChangeDateTimeUseCase", () => {
 	const options = {
 		dateFormat: "YYYY-MM-DD",
 		startKey: "start",
-		defaultDate: { type: "today" },
+		defaultDateType: { type: "today" },
 		defaultView: "month",
 		calendarHeight: 500,
 		eventFontSize: "xs",

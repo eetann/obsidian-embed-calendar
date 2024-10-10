@@ -13,7 +13,7 @@ renderCalendar(
     endKey: "endDateTime",
     newNoteFolder: "inbox",
     newNoteNameType: { type: "date", format: "YYYYMMDDHHmmss" },
-    defaultDate: { type: "fixed", date: "2024-08-01" },
+    defaultDateType: { type: "fixed", date: "2024-08-01" },
     eventRowType: { type: "auto", rowNumber: 2 },
     language: "ja",
   },
@@ -38,7 +38,7 @@ renderCalendar(
     calendarHeight: 700,
     eventFontSize: "lg",
     eventRowType: { type: "manual" },
-    defaultDate: { type: "fixed", date: "2024-08-01" },
+    defaultDateType: { type: "fixed", date: "2024-08-01" },
   },
 );
 ```

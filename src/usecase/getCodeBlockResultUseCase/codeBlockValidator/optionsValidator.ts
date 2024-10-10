@@ -1,4 +1,4 @@
-import { DefaultDateSchema } from "@/usecase/shared/defaultDateSchema";
+import { DefaultDateTypeSchema } from "@/usecase/shared/defaultDateSchema";
 import { getMessages } from "@/usecase/shared/utilValibot";
 import * as v from "valibot";
 
@@ -48,9 +48,12 @@ const OptionsSchema = v.object({
 	startKey: NonEmptySchema,
 	endKey: v.optional(NonEmptySchema),
 	newNoteFolder: NonEmptySchema,
-	newNoteNameType: v.optional(NewNotePathTypeSchema, { type: "modal" }),
+	newNoteNameType: v.optional(NewNotePathTypeSchema, {
+		type: "date",
+		format: "YYYYMMDDHHmmss",
+	}),
 	newNoteMethodType: v.optional(NewNoteMethodTypeSchema, { type: "scratch" }),
-	defaultDate: v.optional(DefaultDateSchema, { type: "today" }),
+	defaultDateType: v.optional(DefaultDateTypeSchema, { type: "today" }),
 	defaultView: v.optional(
 		v.picklist(
 			["month", "week", "work_week", "day", "agenda"],

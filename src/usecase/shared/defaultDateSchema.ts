@@ -1,6 +1,6 @@
 import * as v from "valibot";
 
-export const DefaultDateVariant = v.variant("type", [
+export const DefaultDateTypeVariant = v.variant("type", [
 	v.object({ type: v.literal("today") }),
 	v.object({
 		type: v.literal("fixed"),
@@ -12,8 +12,8 @@ export const DefaultDateVariant = v.variant("type", [
 	// 	key: v.pipe(v.string(), v.nonEmpty()),
 	// }),
 ]);
-export const DefaultDateSchema = v.optional(DefaultDateVariant, {
+export const DefaultDateTypeSchema = v.optional(DefaultDateTypeVariant, {
 	type: "today",
 });
 
-export type DefaultDateType = v.InferOutput<typeof DefaultDateSchema>;
+export type DefaultDateTypeType = v.InferOutput<typeof DefaultDateTypeSchema>;

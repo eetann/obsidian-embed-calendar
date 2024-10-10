@@ -12,7 +12,7 @@ describe("OptionsValidator.test", () => {
 		...minimumOptions,
 		newNoteNameType: { type: "date", format: "YYYYMMDDHHmmss" },
 		newNoteMethodType: { type: "scratch" },
-		defaultDate: { type: "today" },
+		defaultDateType: { type: "today" },
 		defaultView: "month",
 		calendarHeight: 500,
 		eventFontSize: "xs",

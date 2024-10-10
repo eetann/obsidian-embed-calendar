@@ -61,7 +61,9 @@ export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 	}
 
 	const lang = options.language;
-	const defaultDate = new GetDefaultDateUseCase().execute(options.defaultDate);
+	const defaultDate = new GetDefaultDateUseCase().execute(
+		options.defaultDateType,
+	);
 	const updateEvent = new UpdateEvent(plugin, options, setEvents);
 	const createEvent = new CreateEvent(plugin, options, setEvents);
 

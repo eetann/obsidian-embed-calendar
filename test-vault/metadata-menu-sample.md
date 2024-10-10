@@ -14,7 +14,7 @@ renderCalendar(
     startKey: "date",
     newNoteFolder: "metadata-menu",
     newNoteNameType: { type: "date", format: "YYYY-MM-DD" },
-    defaultDate: { type: "fixed", date: "2024-09-23" },
+    defaultDateType: { type: "fixed", date: "2024-09-23" },
     eventRowType: { type: "manual" },
   },
 );
@@ -41,7 +41,7 @@ renderCalendar(
     startKey: "date",
     newNoteFolder: "metadata-menu",
     newNoteNameType: { type: "date", format: "YYYY-MM-DD" },
-    defaultDate: { type: "fixed", date: "2024-09-23" },
+    defaultDateType: { type: "fixed", date: "2024-09-23" },
     eventRowType: { type: "manual" },
     eventFontSize: "sm",
   },

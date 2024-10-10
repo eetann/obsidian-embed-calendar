@@ -10,7 +10,7 @@ renderCalendar(
     allDay: false,
   })),
   {
-    defaultDate: { type: "fixed", date: "2024-08-01" },
+    defaultDateType: { type: "fixed", date: "2024-08-01" },
     defaultView: "day",
     dateFormat: "YYYY-MM-DDTHH:mm:ss",
     startKey: "startDateTime",

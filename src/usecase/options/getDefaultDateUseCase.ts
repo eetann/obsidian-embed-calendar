@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
-import type { DefaultDateType } from "../shared/defaultDateSchema";
+import type { DefaultDateTypeType } from "../shared/defaultDateSchema";
 
 export class GetDefaultDateUseCase {
-	execute(value: DefaultDateType) {
+	execute(value: DefaultDateTypeType) {
 		if (value.type === "fixed") {
 			return dayjs(value.date).toDate();
 		}
