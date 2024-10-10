@@ -16,7 +16,7 @@ const prod = process.argv[2] === "production";
 const copyFiles = [
 	{ from: "dist/main.js", to: "main.js" },
 	{ from: "dist/main.css", to: "styles.css" },
-	{ from: "src/manifest.json", to: "manifest.json" },
+	{ from: "manifest.json", to: "manifest.json" },
 ];
 
 const myCopy = {
