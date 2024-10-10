@@ -10,7 +10,7 @@ describe("OptionsValidator.test", () => {
 	const errorMessage = "Failed to parse options\n";
 	const expectMinimumOptions = {
 		...minimumOptions,
-		newNoteNameType: { type: "modal" },
+		newNoteNameType: { type: "date", format: "YYYYMMDDHHmmss" },
 		newNoteMethodType: { type: "scratch" },
 		defaultDate: { type: "today" },
 		defaultView: "month",
