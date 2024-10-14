@@ -4,7 +4,7 @@ $ mise run build 1.9.2
 $ mise run build 1.9.2-beta
 """
 run = [
-	# TODO: 
+	"pnpm run build", # check tsc
 	"pnpm vitest run",
 	"pnpm version {{arg(name='VERSION')}}",
 	"git push --tags",

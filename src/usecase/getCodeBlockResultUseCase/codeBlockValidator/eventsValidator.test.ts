@@ -5,7 +5,10 @@ describe("EventsValidator", () => {
 	const options = {
 		dateFormat: "YYYY-MM-DD",
 		startKey: "start",
-		defaultDate: { type: "today" },
+		newNoteFolder: "inbox",
+		newNoteNameType: { type: "date", format: "YYYYMMDDHHmmss" },
+		newNoteMethodType: { type: "scratch" },
+		defaultDateType: { type: "today" },
 		defaultView: "month",
 		calendarHeight: 500,
 		eventFontSize: "xs",
