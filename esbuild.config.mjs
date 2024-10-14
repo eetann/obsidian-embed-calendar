@@ -17,6 +17,7 @@ const copyFiles = [
 	{ from: "dist/main.js", to: "main.js" },
 	{ from: "dist/main.css", to: "styles.css" },
 	{ from: "manifest.json", to: "manifest.json" },
+	{ from: "manifest-beta.json", to: "manifest-beta.json" },
 ];
 
 const myCopy = {
