@@ -1,0 +1,12 @@
+[tasks.release]
+description = """
+$ mise run build 1.9.2
+$ mise run build 1.9.2-beta
+"""
+run = [
+	# TODO: 
+	"pnpm vitest run",
+	"pnpm version {{arg(name='VERSION')}}",
+	"git push --tags",
+	"git push"
+]

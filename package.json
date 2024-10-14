@@ -1,14 +1,14 @@
 {
 	"name": "obsidian-embed-calendar",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node --env-file=.env esbuild.config.mjs",
 		"test": "vitest",
-		"build": "tsc -noEmit -skipLibCheck && node --env-file=.env esbuild.config.mjs production",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
 		"copy-vault": "node --env-file=.env copyVault.mjs",
-		"version": "node version-bump.mjs && git add manifest.json versions.json"
+		"version": "node version-bump.mjs && git add manifest-beta.json manifest.json versions.json"
 	},
 	"keywords": [],
 	"author": "",
