@@ -17,12 +17,13 @@ With this plugin, you can embed the calendar in the Obsidian note in the code bl
 
 ![hover preview](./docs/images/hover-preview.jpg)
 
-## Installation
-🚧 WIP!!! 🚧
-<!-- Maybe you can install this with [BRAT](https://tfthacker.com/BRAT). -->
 
+## Installation
 - [Dataview](https://blacksmithgu.github.io/obsidian-dataview/) is required.
 - [Metadata Menu](https://mdelobelle.github.io/metadatamenu/) is optional.
+
+You can install this with [BRAT](https://tfthacker.com/BRAT).
+
 
 ## QuickStart
 Call `renderCalendar` as follows.
@@ -406,7 +407,8 @@ This section is for my own use, so I might move it to GitHub's Project or someth
 - [x] サンプルのmdをdataviewjsに移行
 - [x] ビルドが本番でも動くように変更
 - [x] Settingsなど不要な部分を削除
-- [ ] BRATでインストールできるように頑張る
+- [x] BRATでインストールできるように頑張る
+- [ ] dataviewのauto refresh後でも現在のビューの日時を維持できるように修正
 - [ ] パースに失敗したEventをまとめて表示
 	- [ ] 日時未定の場合は別途表示したい
 - [ ] newNoteMethodTypeの実装
