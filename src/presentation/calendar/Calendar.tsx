@@ -21,20 +21,24 @@ import { useCodeBlock } from "./useCodeBlock";
 const DnDCalendar = withDragAndDrop<EventDTO>(RbcCalendar);
 const localizer = dayjsLocalizer(dayjs);
 
+interface EmbedCalendarPlugin extends Plugin {
+	currentDateDict?: { [x: string]: Date };
+}
+
 type Props = {
-	plugin: Plugin;
+	plugin: EmbedCalendarPlugin;
 	rawEvents: unknown;
 	rawOptions: unknown;
 };
 
 export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 	// To set CSS variables for each Calendar
-	const calendarId = crypto.randomUUID();
 	const { options, events, setEvents, error } = useCodeBlock(
 		plugin,
 		rawEvents,
 		rawOptions,
 	);
+	let calendarId = "";
 	const { setIsDrag } = useDnDContext();
 	const components: Components<EventDTO> = useMemo(
 		() => ({
@@ -44,7 +48,7 @@ export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 	);
 
 	useEffect(() => {
-		if (options) {
+		if (options && calendarId) {
 			applyRowTypeStyle(calendarId, options.eventRowType);
 		}
 	}, [options, calendarId]);
@@ -58,10 +62,25 @@ export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 		return <p>Loading...</p>;
 	}
 
-	const lang = options.language;
-	const defaultDate = new GetDefaultDateUseCase().execute(
+	let defaultDate = new GetDefaultDateUseCase().execute(
 		options.defaultDateType,
 	);
+	if (options.idForKeepDate) {
+		calendarId = options.idForKeepDate;
+		if (plugin.currentDateDict) {
+			if (plugin.currentDateDict[calendarId]) {
+				defaultDate = plugin.currentDateDict[calendarId];
+			} else {
+				plugin.currentDateDict[calendarId] = defaultDate;
+			}
+		} else {
+			plugin.currentDateDict = { [calendarId]: defaultDate };
+		}
+	} else {
+		calendarId = crypto.randomUUID();
+	}
+
+	const lang = options.language;
 	const updateEvent = new UpdateEvent(plugin, options, setEvents);
 	const createEvent = new CreateEvent(plugin, options, setEvents);
 
@@ -123,7 +142,6 @@ export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 					setIsDrag(false);
 				}}
 				onDoubleClickEvent={(event) => {
-					console.log("onDoubleClickEvent");
 					const file = plugin.app.vault.getAbstractFileByPath(event.path);
 					if (file instanceof TFile) {
 						plugin.app.workspace.getLeaf().openFile(file);
@@ -132,6 +150,11 @@ export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 				selectable={true}
 				onSelectSlot={(slotInfo) => {
 					createEvent.execute(slotInfo);
+				}}
+				onNavigate={(newDate) => {
+					if (plugin?.currentDateDict) {
+						plugin.currentDateDict[calendarId] = newDate;
+					}
 				}}
 			/>
 		</div>

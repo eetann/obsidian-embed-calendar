@@ -74,6 +74,8 @@ const OptionsSchema = v.object({
 	),
 	eventRowType: v.optional(EventRowTypeSchema, { type: "oneLine" }),
 	language: v.optional(v.picklist(["en", "ja"]), "en"),
+	// TODO: 後でちゃんとやる
+	idForKeepDate: v.optional(v.string()),
 });
 
 export type OptionsType = v.InferOutput<typeof OptionsSchema>;
