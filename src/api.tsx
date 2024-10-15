@@ -25,9 +25,12 @@ export class EmbedCalendarAPI {
 
 	renderCalendar() {
 		return (containerEl: Element, rawEvents: unknown, rawOptions: unknown) => {
+			// Temporary fix.
 			// As it is executed multiple times by dataview, the following warning is displayed.
-			// createRoot() on a container that has already been passed to createRoot() before...
-			const root = createRoot(containerEl);
+			// "createRoot() on a container that has already been passed to createRoot() before..."
+			containerEl.empty();
+			const div = containerEl.createDiv("div");
+			const root = createRoot(div);
 			root.render(
 				<App
 					plugin={this.plugin}
