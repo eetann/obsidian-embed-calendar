@@ -54,6 +54,7 @@ const OptionsSchema = v.object({
 	}),
 	newNoteMethodType: v.optional(NewNoteMethodTypeSchema, { type: "scratch" }),
 	defaultDateType: v.optional(DefaultDateTypeSchema, { type: "today" }),
+	idForKeepDate: v.optional(NonEmptySchema),
 	defaultView: v.optional(
 		v.picklist(
 			["month", "week", "work_week", "day", "agenda"],
@@ -74,8 +75,6 @@ const OptionsSchema = v.object({
 	),
 	eventRowType: v.optional(EventRowTypeSchema, { type: "oneLine" }),
 	language: v.optional(v.picklist(["en", "ja"]), "en"),
-	// TODO: 後でちゃんとやる
-	idForKeepDate: v.optional(v.string()),
 });
 
 export type OptionsType = v.InferOutput<typeof OptionsSchema>;

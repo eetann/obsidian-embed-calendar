@@ -17,6 +17,7 @@ import { CreateEvent } from "./rbcCalendar/handler/createEvent";
 import { UpdateEvent } from "./rbcCalendar/handler/updateEvent";
 import { cultures } from "./rbcCalendar/localization";
 import { useCodeBlock } from "./useCodeBlock";
+import { useDefaultDate } from "./useDefaultDate";
 
 const DnDCalendar = withDragAndDrop<EventDTO>(RbcCalendar);
 const localizer = dayjsLocalizer(dayjs);
@@ -38,7 +39,7 @@ export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 		rawEvents,
 		rawOptions,
 	);
-	let calendarId = "";
+	const { defaultDate, calendarId } = useDefaultDate(plugin, options);
 	const { setIsDrag } = useDnDContext();
 	const components: Components<EventDTO> = useMemo(
 		() => ({
@@ -60,24 +61,6 @@ export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 
 	if (!options || !events) {
 		return <p>Loading...</p>;
-	}
-
-	let defaultDate = new GetDefaultDateUseCase().execute(
-		options.defaultDateType,
-	);
-	if (options.idForKeepDate) {
-		calendarId = options.idForKeepDate;
-		if (plugin.currentDateDict) {
-			if (plugin.currentDateDict[calendarId]) {
-				defaultDate = plugin.currentDateDict[calendarId];
-			} else {
-				plugin.currentDateDict[calendarId] = defaultDate;
-			}
-		} else {
-			plugin.currentDateDict = { [calendarId]: defaultDate };
-		}
-	} else {
-		calendarId = crypto.randomUUID();
 	}
 
 	const lang = options.language;
