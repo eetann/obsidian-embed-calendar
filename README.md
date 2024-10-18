@@ -5,7 +5,7 @@ With this plugin, you can embed the calendar in the Obsidian note in the code bl
 
 ## Features
 
-- 🗓️ Supports month/week/day/agenda views
+- 🗓️ Supports month/week/day views
 - 🖱️ Drag-and-drop date change
 - 🆕 Create a new note with a specific date
 - 🔍 Query of notes by plugin [Dataview](https://blacksmithgu.github.io/obsidian-dataview/)
@@ -244,7 +244,7 @@ View to be treated as default from the following list.
 - month
 - week
 - day
-- agenda
+<!-- - agenda -->
 
 Default is `month`.
 
@@ -409,6 +409,7 @@ This section is for my own use, so I might move it to GitHub's Project or someth
 - [x] Settingsなど不要な部分を削除
 - [x] BRATでインストールできるように頑張る
 - [ ] dataviewのauto refresh後でも現在のビューの日時を維持できるように修正
+- [ ] ブランチ分ける、このロードマップを移動する
 - [ ] パースに失敗したEventをまとめて表示
 	- [ ] 日時未定の場合は別途表示したい
 - [ ] newNoteMethodTypeの実装

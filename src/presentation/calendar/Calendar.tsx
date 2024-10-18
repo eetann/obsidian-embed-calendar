@@ -1,17 +1,18 @@
 import "./overwrite.css";
 import type { EventDTO } from "@/usecase/event/eventDTO";
-import { GetDefaultDateUseCase } from "@/usecase/options/getDefaultDateUseCase";
 import dayjs from "dayjs";
 import { type Plugin, TFile } from "obsidian";
 import { useEffect, useMemo } from "react";
 import {
 	type Components,
 	Calendar as RbcCalendar,
+	type ToolbarProps,
 	dayjsLocalizer,
 } from "react-big-calendar";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { useDnDContext } from "./provider/DnDContextProvider";
 import EventContent from "./rbcCalendar/EventContent";
+import { Toolbar } from "./rbcCalendar/Toolbar";
 import { applyRowTypeStyle } from "./rbcCalendar/applyRowTypeStyle";
 import { CreateEvent } from "./rbcCalendar/handler/createEvent";
 import { UpdateEvent } from "./rbcCalendar/handler/updateEvent";
@@ -44,8 +45,11 @@ export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 	const components: Components<EventDTO> = useMemo(
 		() => ({
 			event: EventContent,
+			toolbar: (props: ToolbarProps) => (
+				<Toolbar {...props} defaultDate={defaultDate} />
+			),
 		}),
-		[],
+		[defaultDate],
 	);
 
 	useEffect(() => {
@@ -86,7 +90,7 @@ export default function Calendar({ plugin, rawEvents, rawOptions }: Props) {
 				components={components}
 				defaultView={options.defaultView}
 				// TODO: work_weekも自由に入れられるようにオプション化
-				views={["month", "week", "day", "agenda"]}
+				views={["month", "week", "day"]}
 				// views={["month", "week", "work_week", "day", "agenda"]}
 				eventPropGetter={() => {
 					let fontSize = "text-xs";
