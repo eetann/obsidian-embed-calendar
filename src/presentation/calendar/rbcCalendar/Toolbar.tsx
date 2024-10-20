@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Navigate, type ToolbarProps, type View } from "react-big-calendar";
 
 interface MyToolbarProps extends ToolbarProps {
@@ -19,9 +20,10 @@ export function Toolbar({
 				<button
 					type="button"
 					onClick={() => onNavigate(Navigate.PREVIOUS)}
+					className="!px-1"
 					aria-label={messages.previous}
 				>
-					{messages.previous}
+					<ChevronLeft />
 				</button>
 				<button
 					type="button"
@@ -40,9 +42,10 @@ export function Toolbar({
 				<button
 					type="button"
 					onClick={() => onNavigate(Navigate.NEXT)}
+					className="!px-1"
 					aria-label={messages.next}
 				>
-					{messages.next}
+					<ChevronRight />
 				</button>
 			</span>
 			<span className="rbc-toolbar-label">{label}</span>

@@ -18,7 +18,12 @@
 	display: none;
 }
 
+.rbc-btn-group {
+	display: flex;
+}
+
 .rbc-toolbar button {
+	display: inherit;
 	background-color: var(--background-primary);
 	color: var(--text-muted);
 
