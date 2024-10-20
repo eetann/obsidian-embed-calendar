@@ -43,6 +43,7 @@ renderCalendar(
     endKey: "endDate",
     newNoteFolder: "inbox",
     newNoteNameType: { type: "date", format: "YYYYMMDD" },
+    idForKeepDate: "my-habit-calendar",
   },
 );
 ```
@@ -133,19 +134,20 @@ renderCalendar(
 
 ## calendar options (3rd argument)
 
-| key               | required |
-|-------------------|----------|
-| dateFormat        | required |
-| startKey          | required |
-| endKey            | optional |
-| newNoteFolder     | required |
-| newNoteNameType   | optional |
-| defaultDateType   | optional |
-| defaultView       | optional |
-| calendarHeight    | optional |
-| eventFontSize     | optional |
-| eventRowType      | optional |
-| language          | optional |
+| key             | required                 |
+|-----------------|--------------------------|
+| dateFormat      | required                 |
+| startKey        | required                 |
+| endKey          | optional                 |
+| newNoteFolder   | required                 |
+| newNoteNameType | optional                 |
+| defaultDateType | optional                 |
+| idForKeepDate   | optional (but recommend) |
+| defaultView     | optional                 |
+| calendarHeight  | optional                 |
+| eventFontSize   | optional                 |
+| eventRowType    | optional                 |
+| language        | optional                 |
 
 ### dateFormat
 Required.  
@@ -235,6 +237,15 @@ The date specified in `date` is used as the basis for when the calendar is first
 
 ```js
 defaultDateType: { type: "fixed", date: "2024-04-20" },
+```
+
+### idForKeepDate
+Optional but recommended.  
+If you write a unique string, you can keep the calendar display (which date and time is being displayed) even if an auto refresh of the Dataview occurs.
+
+example:
+```js
+idForKeepDate: "my-habit-calendar",
 ```
 
 ### defaultView
@@ -377,43 +388,5 @@ npm run dev
 ```
 
 ## Roadmap
-This section is for my own use, so I might move it to GitHub's Project or something.
-
-- [x] リンクを有効化
-- [x] allDayのときのend
-- [ ] カレンダーの初期表示の日付 (デフォルトは今日)
-	- [x] 今日
-	- [x] 固定
-	- [ ] プロパティと連動(書き換えあり)
-- [x] カレンダーの初期表示のView (デフォルトは月)
-- [x] フォントサイズの変更
-- [x] スタイルの調整
-- [x] 2行
-- [x] 言語の変更
-- [x] エラー表示
-- [x] titleの改行を有効化
-- [x] D&Dによる日時移動
-- [x] allDayの期間の終わりを正しく表示
-- [x] D&Dによる日時範囲の変更
-- [x] 新しいノートの作成
-- [x] weekやDayで、短い期間でも選択可能にする
-	- [x] weekやdayでホバーの範囲を文字列以外でも可能にする
-- [x] Dataviewの読み込みができるまでは表示しない
-- [x] metadataの表示
-	- [x] metadataを複数表示
-- [x] metadata menuの対応
-- [x] app.cssの移行と
-- [x] リンクCSSの解除をtailwindに戻す
-- [x] サンプルのmdをdataviewjsに移行
-- [x] ビルドが本番でも動くように変更
-- [x] Settingsなど不要な部分を削除
-- [x] BRATでインストールできるように頑張る
-- [ ] dataviewのauto refresh後でも現在のビューの日時を維持できるように修正
-- [ ] ブランチ分ける、このロードマップを移動する
-- [ ] パースに失敗したEventをまとめて表示
-	- [ ] 日時未定の場合は別途表示したい
-- [ ] newNoteMethodTypeの実装
-- [ ] Develop向けに、Metadata Menuを自動で設定できるようにする
-- [ ] DnDでendが無い場合は二日以上にさせない
-- [ ] テストの追加
-  - [ ] 参考: https://github.com/ycnmhd/obsidian-lineage
+The roadmap I think is the following one.
+[Board · Obsidian Embed Calendar project](https://github.com/users/eetann/projects/3/views/1)

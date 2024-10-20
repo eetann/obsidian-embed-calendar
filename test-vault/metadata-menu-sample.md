@@ -15,6 +15,7 @@ renderCalendar(
     newNoteFolder: "metadata-menu",
     newNoteNameType: { type: "date", format: "YYYY-MM-DD" },
     defaultDateType: { type: "fixed", date: "2024-09-23" },
+    idForKeepDate: "test-id",
     eventRowType: { type: "manual" },
   },
 );
