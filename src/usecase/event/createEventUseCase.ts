@@ -5,8 +5,10 @@ import { Path } from "@/domain/model/event/path/path";
 import { Title } from "@/domain/model/event/title/title";
 import type { IFileRepository } from "@/domain/model/shared/IFileRepository";
 import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
 import type { OptionsType } from "../getCodeBlockResultUseCase/codeBlockValidator/optionsValidator";
 import { EventDTO } from "./eventDTO";
+dayjs.extend(localizedFormat);
 
 type CreateEventCommand = {
 	start: string | Date;
@@ -18,6 +20,7 @@ export class CreateEventUseCase {
 	constructor(private fileRepository: IFileRepository) {}
 
 	async execute({ start, end, options }: CreateEventCommand) {
+		dayjs.locale(options.language);
 		let fileName = "untitled";
 		if (options.newNoteNameType.type === "date") {
 			fileName = dayjs().format(options.newNoteNameType.format);

@@ -1,7 +1,7 @@
 {
   "id": "obsidian-embed-calendar",
   "name": "Obsidian Embed Calendar",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "minAppVersion": "0.15.0",
   "description": "With this plugin, you can embed the calendar in the Obsidian note in the code block.",
   "author": "eetann",
